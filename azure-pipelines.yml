@@ -19,7 +19,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   csproj: 'Geometry.csproj'
-  version: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)'
+  version: '$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)'
 
 jobs:
 - job: Build
