@@ -1,1 +1,1 @@
-﻿# Geometry
+﻿# Geometry [![Build Status](https://dev.azure.com/StudioLE/Geometry/_apis/build/status/StudioLE.Geometry?branchName=master)](https://dev.azure.com/StudioLE/Geometry/_build/latest?definitionId=1&branchName=master)
