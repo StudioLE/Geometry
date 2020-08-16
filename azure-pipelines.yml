@@ -3,54 +3,54 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+# the build will trigger on any changes to the master branch
 trigger:
 - master
 
+# the build will run on a Microsoft hosted agent, using the lastest Windows VM Image
 pool:
-  name: Hosted VS2017
-  demands: msbuild
+  vmImage: 'windows-latest'
 
+# these variables are available throughout the build file
+# just the build configuration is defined, in this case we are building Release packages
+variables:
+  buildConfiguration: 'Release'
+  csproj: 'Geometry.csproj'
+
+#The build has 3 seperate tasks run under 1 step
 steps:
 
-- task: UseDotNet@2
+# The first task is the dotnet command build, pointing to our csproj file
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
   inputs:
-    packageType: 'sdk'
-    version: '2.0.x'
+    command: 'build'
+    arguments: '--configuration $(buildConfiguration)'
+    projects: '$(csproj)'
 
-- task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 4.9.3'
+# The second task is dotnet pack command again pointing to the csproj file
+# The nobuild means the project will not be compiled before running pack, because its already built in above step
+- task: DotNetCoreCLI@2
+  displayName: "dotnet pack"
   inputs:
-    versionSpec: 4.9.3
+    command: 'pack'
+    arguments: '--configuration $(buildConfiguration)'
+    packagesToPack: '$(csproj)'
+    nobuild: true
+    versioningScheme: 'off'
 
+# The last task is a nuget command, nuget push
+# This will push any .nupkg files to the 'TestFeed' artifact feed
+# allowPackageConflicts allows us to build the same version and not throw an error when trying to push
+# instead it just ingores the latest package unless the version changes
 - task: NuGetCommand@2
-  displayName: 'NuGet restore'
+  displayName: 'nuget push'
   inputs:
-    restoreSolution: '**\*.sln'
-
-# build and pack a beta version of the NuGet package. Versioning is done through the name tag in this definition.
-- task: MSBuild@1
-  displayName: 'Build beta'
-  inputs:
-    solution: Geometry.csproj
-    msbuildArguments: '/t:restore;build;pack /p:PackageVersion=$(Build.BuildNumber)-beta /p:PackageOutputPath=$(build.artifactstagingdirectory)/beta /p:AssemblyFileVersion=$(Build.BuildNumber)  '
-    clean: true
-
-# build and pack a final version of the NuGet package. Versioning is done through the name tag in this definition.
-- task: MSBuild@1
-  displayName: 'Build final'
-  inputs:
-    solution: Geometry.csproj
-    msbuildArguments: '/t:restore;build;pack /p:PackageVersion=$(Build.BuildNumber) /p:PackageOutputPath=$(build.artifactstagingdirectory)/final /p:AssemblyFileVersion=$(Build.BuildNumber) '
-    clean: true
-
-# copy all the nupkg files created to the artifact directory
-- task: CopyFiles@2
-  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-  inputs:
-    SourceFolder: '$(build.sourcesdirectory)'
-    Contents: '**\*.nupkg'
-    TargetFolder: '$(build.artifactstagingdirectory)'
-
-# publish the artifacts as results of the build
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '432b0650-65c4-4dc4-8be1-26825520dbf4/351f9c1a-98cf-4c06-8c95-39a43962f5e2'
+    allowPackageConflicts: true
