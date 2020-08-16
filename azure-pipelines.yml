@@ -27,10 +27,6 @@ jobs:
 - job: Build
   # Print env
   steps:
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: 'env | sort'
   # Build
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
@@ -52,12 +48,6 @@ jobs:
       targetPath: '$(Build.ArtifactStagingDirectory)'
       artifact: 'nupkg'
       publishLocation: 'pipeline'
-
-  #- task: PublishBuildArtifacts@1
-  #  inputs:
-  #    PathtoPublish: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
-  #    ArtifactName: 'drop'
-  #    publishLocation: 'Container'
 
 - job: Deploy
   dependsOn: Build
