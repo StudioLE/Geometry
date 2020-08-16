@@ -6,6 +6,9 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+# Build name
+name: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)'
+
 # the build will trigger on any changes to the master branch
 trigger:
 - master
@@ -19,7 +22,6 @@ pool:
 variables:
   buildConfiguration: 'Release'
   csproj: 'Geometry.csproj'
-  version: '${{Year:yyyy}}.${{Month}}.${{DayOfMonth}}${{Rev:.r}}'
 
 jobs:
 - job: Build
@@ -43,8 +45,7 @@ jobs:
       command: 'pack'
       packagesToPack: '$(csproj)'
       nobuild: true
-      versioningScheme: 'byEnvVar'
-      versionEnvVar: 'version'
+      versioningScheme: 'byBuildNumber'
   # Publish NuGet Artifact
   - task: PublishPipelineArtifact@1
     inputs:
