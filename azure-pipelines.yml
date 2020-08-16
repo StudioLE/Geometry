@@ -43,7 +43,7 @@ jobs:
   # Publish NuGet Artifact
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+      targetPath: '$(Build.ArtifactStagingDirectory)'
       artifact: 'nupkg'
       publishLocation: 'pipeline'
 
@@ -61,6 +61,9 @@ jobs:
     inputs:
       buildType: 'current'
       artifactName: 'nupkg'
+      itemPattern: |
+        *.nupkg
+        !*.symbols.nupkg
       targetPath: '$(Pipeline.Workspace)'
   # Deploy to Feed
   - task: NuGetCommand@2
