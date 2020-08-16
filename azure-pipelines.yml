@@ -23,7 +23,12 @@ variables:
 
 jobs:
 - job: Build
+  # Print env
   steps:
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: 'env | sort'
   # Build
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
