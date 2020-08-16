@@ -9,6 +9,8 @@
     <RepositoryUrl>https://github.com/StudioLE/Geometry</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.0.1</Version>
+    <PackageId>StudioLE.Geometry</PackageId>
+    <Product>StudioLE.Geometry</Product>
   </PropertyGroup>
 
 </Project>
