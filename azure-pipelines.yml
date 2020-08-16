@@ -7,7 +7,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 # Build name
-name: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)'
+name: '$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)'
 
 # the build will trigger on any changes to the master branch
 trigger:
