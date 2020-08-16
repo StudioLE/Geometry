@@ -23,17 +23,14 @@ variables:
 jobs:
 - job: Build
   steps:
-
-  # The first task is the dotnet command build, pointing to our csproj file
+  # Build
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
     inputs:
       command: 'build'
       arguments: '--configuration $(buildConfiguration)'
       projects: '$(csproj)'
-
-  # The second task is dotnet pack command again pointing to the csproj file
-  # The nobuild means the project will not be compiled before running pack, because its already built in above step
+  # Pack NuGet
   - task: DotNetCoreCLI@2
     displayName: "dotnet pack"
     inputs:
@@ -42,20 +39,35 @@ jobs:
       packagesToPack: '$(csproj)'
       nobuild: true
       versioningScheme: 'off'
+      
+  # Publish NuGet Artifact
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+      artifact: 'nupkg'
+      publishLocation: 'pipeline'
+
+  #- task: PublishBuildArtifacts@1
+  #  inputs:
+  #    PathtoPublish: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+  #    ArtifactName: 'drop'
+  #    publishLocation: 'Container'
 
 - job: Deploy
   dependsOn: Build
   steps:
-
-  # The last task is a nuget command, nuget push
-  # This will push any .nupkg files to the artifact feed
-  # allowPackageConflicts allows us to build the same version and not throw an error when trying to push
-  # instead it just ingores the latest package unless the version changes
+  # Download NuGet Artifact
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      buildType: 'current'
+      artifactName: 'nupkg'
+      targetPath: '$(Pipeline.Workspace)'
+  # Deploy to Feed
   - task: NuGetCommand@2
     displayName: 'nuget push'
     inputs:
       command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+      packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
       nuGetFeedType: 'internal'
       publishVstsFeed: '432b0650-65c4-4dc4-8be1-26825520dbf4/351f9c1a-98cf-4c06-8c95-39a43962f5e2'
       allowPackageConflicts: true
