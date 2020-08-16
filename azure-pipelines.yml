@@ -11,6 +11,12 @@ pool:
   demands: msbuild
 
 steps:
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '2.0.x'
+
 - task: NuGetToolInstaller@0
   displayName: 'Use NuGet 4.9.3'
   inputs:
