@@ -19,6 +19,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   csproj: 'Geometry.csproj'
+  version: '$(BuildDefinitionName)_$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)'
 
 jobs:
 - job: Build
@@ -37,7 +38,8 @@ jobs:
       command: 'pack'
       packagesToPack: '$(csproj)'
       nobuild: true
-      versioningScheme: 'byBuildNumber'
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'version'
   # Publish NuGet Artifact
   - task: PublishPipelineArtifact@1
     inputs:
