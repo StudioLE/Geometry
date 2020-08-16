@@ -43,7 +43,8 @@ jobs:
       nobuild: true
       versioningScheme: 'off'
 
-- job: DevelopmentDeployment
+- job: Deploy
+  dependsOn: Build
   steps:
 
   # The last task is a nuget command, nuget push
