@@ -2,7 +2,7 @@
 
 namespace StudioLE.Geometry
 {
-    class Cuboid : Solid
+    public class Cuboid : Solid
     {
         public double Width { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace StudioLE.Geometry
 {
-    class Cube : Cuboid
+    public class Cube : Cuboid
     {
         public Cube(double length) : base(length, length, length)
         {

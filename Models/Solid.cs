@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace StudioLE.Geometry
 {
-    class Solid
+    public class Solid
     {
         public Color Color { get; set; } = Color.Black;
 

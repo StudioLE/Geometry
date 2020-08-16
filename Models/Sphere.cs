@@ -2,7 +2,7 @@
 
 namespace StudioLE.Geometry
 {
-    class Sphere : Solid
+    public class Sphere : Solid
     {
         public double Radius { get; set; }
 

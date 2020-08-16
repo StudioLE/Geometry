@@ -2,7 +2,7 @@
 
 namespace StudioLE.Geometry
 {
-    class Cylinder : Sphere
+    public class Cylinder : Sphere
     {
         public double Height { get; set; }
 
