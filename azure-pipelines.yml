@@ -27,6 +27,14 @@ jobs:
 - job: Build
   # Print env
   steps:
+  - task: CmdLine@2
+    inputs:
+      script: |
+        echo $(Build.SourceVersion)
+        set  FullHash=$(Build.SourceVersion)
+        set Hash= %FullHash:~0,7%
+        echo %Hash%
+        echo "##vso[task.setvariable variable=Hash]%Hash%"
   # Build
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
