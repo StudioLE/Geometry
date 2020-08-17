@@ -7,7 +7,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 # Build name
-name: '$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)'
+name: '$(Year:yyyy).$(Month).$(DayOfMonth).$(Rev:r)'
 
 # the build will trigger on any changes to the master branch
 trigger:
@@ -25,8 +25,26 @@ variables:
 
 jobs:
 - job: Build
-  # Print env
+  # Set env
   steps:
+  - task: CmdLine@2
+    inputs:
+      script: |
+        echo $(Build.SourceVersion)
+        set  FullHash=$(Build.SourceVersion)
+        set Hash=%FullHash:~0,7%
+        echo %Hash%
+        echo ##vso[task.setvariable variable=Hash]%Hash%
+        
+        echo $(Build.BuildNumber)
+        set  BuildNumber=$(Build.BuildNumber)
+        echo %BuildNumber%-%Hash%
+        set  VersionNumber=%BuildNumber%-%Hash%
+        echo ##vso[task.setvariable variable=VersionNumber]%VersionNumber%
+  # - task: Bash@3
+  #   inputs:
+  #     targetType: 'inline'
+  #     script: 'env | sort'
   # Build
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
@@ -34,29 +52,47 @@ jobs:
       command: 'build'
       arguments: '--configuration $(buildConfiguration)'
       projects: '$(csproj)'
-  # Pack NuGet
+  # Pack Canary NuGet
   - task: DotNetCoreCLI@2
     displayName: "dotnet pack"
     inputs:
       command: 'pack'
       packagesToPack: '$(csproj)'
+      packDirectory: '$(Build.ArtifactStagingDirectory)/Canary'
       nobuild: true
-      versioningScheme: 'byBuildNumber'
-  # Publish NuGet Artifact
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'VERSIONNUMBER'
+  # Publish Canary NuGet Artifact
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: '$(Build.ArtifactStagingDirectory)'
-      artifact: 'nupkg'
+      targetPath: '$(Build.ArtifactStagingDirectory)/Canary'
+      artifact: 'Canary'
+      publishLocation: 'pipeline'
+  # Pack Release NuGet
+  - task: DotNetCoreCLI@2
+    displayName: "dotnet pack"
+    inputs:
+      command: 'pack'
+      packagesToPack: '$(csproj)'
+      packDirectory: '$(Build.ArtifactStagingDirectory)/Release'
+      nobuild: true
+      versioningScheme: 'off'
+  # Publish Release NuGet Artifact
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)/Release'
+      artifact: 'Release'
       publishLocation: 'pipeline'
 
-- job: Deploy
+
+- job: Deploy_Canary
   dependsOn: Build
   steps:
   # Download NuGet Artifact
   - task: DownloadPipelineArtifact@2
     inputs:
       buildType: 'current'
-      artifactName: 'nupkg'
+      artifactName: 'Canary'
       itemPattern: |
         *.nupkg
         !*.symbols.nupkg
@@ -68,5 +104,28 @@ jobs:
       command: 'push'
       packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
       nuGetFeedType: 'internal'
-      publishVstsFeed: '432b0650-65c4-4dc4-8be1-26825520dbf4/351f9c1a-98cf-4c06-8c95-39a43962f5e2'
+      publishVstsFeed: '1583421a-8ea4-4552-8169-e93d4131d2f9'
+      allowPackageConflicts: true
+
+
+- job: Deploy_Release
+  dependsOn: Build
+  steps:
+  # Download NuGet Artifact
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      buildType: 'current'
+      artifactName: 'Release'
+      itemPattern: |
+        *.nupkg
+        !*.symbols.nupkg
+      targetPath: '$(Pipeline.Workspace)'
+  # Deploy to Feed
+  - task: NuGetCommand@2
+    displayName: 'nuget push'
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
+      nuGetFeedType: 'internal'
+      publishVstsFeed: 'bfe316ce-2b20-4a66-bc40-82df1b3caa61'
       allowPackageConflicts: true
