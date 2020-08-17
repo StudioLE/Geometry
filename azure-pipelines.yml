@@ -7,7 +7,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 # Build name
-name: '$(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)-$(Build.SourceVersion)'
+name: '$(Year:yyyy).$(Month).$(DayOfMonth).$(Rev:r)'
 
 # the build will trigger on any changes to the master branch
 trigger:
@@ -35,6 +35,12 @@ jobs:
         set Hash= %FullHash:~0,7%
         echo %Hash%
         echo "##vso[task.setvariable variable=Hash]%Hash%"
+        
+        echo $(Build.BuildNumber)
+        set  BuildNumber=$(Build.BuildNumber)
+        echo %BuildNumber%
+        echo "%BuildNumber%-%Hash%"
+        echo "##vso[task.setvariable variable=Hash]%BuildNumber%-%Hash%"
   - task: Bash@3
     inputs:
       targetType: 'inline'
