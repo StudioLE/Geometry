@@ -62,7 +62,7 @@ jobs:
       nobuild: true
       versioningScheme: 'byEnvVar'
       versionEnvVar: 'VERSIONNUMBER'
-  # Publish Release NuGet Artifact
+  # Publish Canary NuGet Artifact
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)/Canary'
@@ -77,11 +77,11 @@ jobs:
       packDirectory: '$(Build.ArtifactStagingDirectory)/Release'
       nobuild: true
       versioningScheme: 'off'
-  # Publish Canary NuGet Artifact
+  # Publish Release NuGet Artifact
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)/Release'
-      artifact: 'Canary'
+      artifact: 'Release'
       publishLocation: 'pipeline'
 
 
