@@ -87,7 +87,7 @@ jobs:
 
 - job: Deploy_Canary
   dependsOn: Build
-  steps:
+  steps:  
   # Download NuGet Artifact
   - task: DownloadPipelineArtifact@2
     inputs:
@@ -111,6 +111,10 @@ jobs:
 - job: Deploy_Release
   dependsOn: Build
   steps:
+  # Approval Gate
+  - task: ManualIntervention@8
+    inputs:
+      instructions: 'Release deployment requires approval'
   # Download NuGet Artifact
   - task: DownloadPipelineArtifact@2
     inputs:
