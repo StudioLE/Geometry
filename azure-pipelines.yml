@@ -106,34 +106,3 @@ jobs:
       nuGetFeedType: 'internal'
       publishVstsFeed: '1583421a-8ea4-4552-8169-e93d4131d2f9'
       allowPackageConflicts: true
-
-
-- job: Deploy_Release
-  dependsOn: Build
-  steps:
-  # Download NuGet Artifact
-  - task: DownloadPipelineArtifact@2
-    inputs:
-      buildType: 'current'
-      artifactName: 'Release'
-      itemPattern: |
-        *.nupkg
-        !*.symbols.nupkg
-      targetPath: '$(Pipeline.Workspace)'
-  # Deploy to Feed
-  - task: NuGetCommand@2
-    displayName: 'nuget push'
-    inputs:
-      command: 'push'
-      packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
-      nuGetFeedType: 'internal'
-      publishVstsFeed: 'bfe316ce-2b20-4a66-bc40-82df1b3caa61'
-      allowPackageConflicts: true
-  # Deploy to nuget.org
-  - task: NuGetCommand@2
-    displayName: 'nuget push'
-    inputs:
-      command: 'push'
-      packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
-      nuGetFeedType: 'external'
-      publishFeedCredentials: 'nuget.org'
