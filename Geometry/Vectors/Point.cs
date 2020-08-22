@@ -2,18 +2,26 @@
 
 namespace StudioLE.Geometry
 {
-    public class Point : Vector
+    public class Point
     {
-        [Obsolete("Don't use this", true)]
-        public override double Distance { get { throw new NotImplementedException(); } }
+        public double X { get; set; }
 
-        public static new Point Origin { get { return new Point(0, 0, 0); } }
+        public double Y { get; set; }
 
-        public Point(double x, double y, double z) : base(x, y, z)
+        public double Z { get; set; }
+
+        public static Point Origin { get { return new Point(0, 0, 0); } }
+
+        public Point(double x, double y, double z)
         {
             X = x;
             Y = y;
             Z = z;
+        }
+
+        public double DistanceTo(Point p2)
+        {
+            return Math.Sqrt(Math.Pow(X - p2.X, 2) + Math.Pow(Y - p2.Y, 2) + Math.Pow(Z - p2.Z, 2));
         }
     }
 }

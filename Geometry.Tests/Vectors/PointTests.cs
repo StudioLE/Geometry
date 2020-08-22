@@ -19,7 +19,7 @@ namespace StudioLE.Geometry.Tests
         {
             Point p1 = new Point(x, y, z);
             double expect = DistanceBetween(Point.Origin, p1);
-            Assert.AreEqual(expect, Point.Origin.DistanceBetween(p1), "Distance is not correct");
+            Assert.AreEqual(expect, Point.Origin.DistanceTo(p1), "Distance is not correct");
         }
 
         [TestCase(1, 2, 3)]
@@ -27,19 +27,13 @@ namespace StudioLE.Geometry.Tests
         {
             Point p1 = new Point(x, y, z);
             double expect = DistanceBetween(point, p1);
-            Assert.AreEqual(expect, point.DistanceBetween(p1), "Distance is not correct");
+            Assert.AreEqual(expect, point.DistanceTo(p1), "Distance is not correct");
         }
 
         [Test]
         public void PointIs_Vector()
         {
             Assert.IsNotNull(point as Vector, "Should be a Vector");
-        }
-
-        [Test]
-        public void Point_InvalidDistance()
-        {
-            Assert.Throws<NotImplementedException>(() => { double test = point.Distance; }, "Should not have Distance");
         }
 
         private static double DistanceBetween(Point p1, Point p2)

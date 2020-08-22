@@ -2,28 +2,22 @@
 
 namespace StudioLE.Geometry
 {
-    public class Vector
+    public class Vector : Point
     {
-        public double X { get; set; }
+        public static new Vector Origin { get { return new Vector(0, 0, 0); } }
 
-        public double Y { get; set; }
+        public double Distance { get { return DistanceTo(Origin); } }
 
-        public double Z { get; set; }
-
-        public virtual double Distance { get { return DistanceBetween(Origin); } }
-
-        public static Vector Origin { get { return new Vector(0, 0, 0); } }
-
-        public Vector(double x, double y, double z)
+        public Vector(double x, double y, double z) : base(x, y, z)
         {
             X = x;
             Y = y;
             Z = z;
         }
 
-        public double DistanceBetween(Vector v2)
+        public double DistanceTo(Vector v2)
         {
-            return Math.Sqrt(Math.Pow(X - v2.X, 2) + Math.Pow(Y - v2.Y, 2) + Math.Pow(Z - v2.Z, 2));
+            return DistanceTo(v2);
         }
     }
 }
