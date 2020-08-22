@@ -15,6 +15,42 @@ namespace StudioLE.Geometry
             Z = z;
         }
 
+        public static Vector operator +(Vector v1, Vector v2)
+        {
+            return new Vector(
+                v1.X + v2.X,
+                v1.Y + v2.Y,
+                v1.Z + v2.Z
+            );
+        }
+
+        public static Vector operator -(Vector v1, Vector v2)
+        {
+            return new Vector(
+                v1.X - v2.X,
+                v1.Y - v2.Y,
+                v1.Z - v2.Z
+            );
+        }
+
+        public static Vector operator *(Vector v1, Vector v2)
+        {
+            return new Vector(
+                v1.X * v2.X,
+                v1.Y * v2.Y,
+                v1.Z * v2.Z
+            );
+        }
+
+        public static Vector operator /(Vector v1, Vector v2)
+        {
+            return new Vector(
+                v1.X / v2.X,
+                v1.Y / v2.Y,
+                v1.Z / v2.Z
+            );
+        }
+
         public double DistanceTo(Vector v2)
         {
             return DistanceTo(v2);

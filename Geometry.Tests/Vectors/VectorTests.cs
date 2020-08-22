@@ -59,6 +59,58 @@ namespace StudioLE.Geometry.Tests
             Assert.DoesNotThrow(() => { double test = vector.Distance; }, "Should have Distance");
         }
 
+        [TestCase(1, 2, 3)]
+        public void Vector_VectorAddition(double x, double y, double z)
+        {
+            Vector v2 = new Vector(x, y, z);
+            Vector v3 = vector + v2;
+            Vector expect = new Vector(
+                vector.X + v2.X,
+                vector.Y + v2.Y,
+                vector.Z + v2.Z
+            );
+            Assert.IsTrue(v3.Equals(expect), "Vector is not correct");
+        }
+
+        [TestCase(1, 2, 3)]
+        public void Vector_VectorSubtraction(double x, double y, double z)
+        {
+            Vector v2 = new Vector(x, y, z);
+            Vector v3 = vector - v2;
+            Vector expect = new Vector(
+                vector.X - v2.X,
+                vector.Y - v2.Y,
+                vector.Z - v2.Z
+            );
+            Assert.IsTrue(v3.Equals(expect), "Vector is not correct");
+        }
+
+        [TestCase(1, 2, 3)]
+        public void Vector_VectorMultiplication(double x, double y, double z)
+        {
+            Vector v2 = new Vector(x, y, z);
+            Vector v3 = vector * v2;
+            Vector expect = new Vector(
+                vector.X * v2.X,
+                vector.Y * v2.Y,
+                vector.Z * v2.Z
+            );
+            Assert.IsTrue(v3.Equals(expect), "Vector is not correct");
+        }
+
+        [TestCase(1, 2, 3)]
+        public void Vector_VectorDivision(double x, double y, double z)
+        {
+            Vector v2 = new Vector(x, y, z);
+            Vector v3 = vector / v2;
+            Vector expect = new Vector(
+                vector.X / v2.X,
+                vector.Y / v2.Y,
+                vector.Z / v2.Z
+            );
+            Assert.IsTrue(v3.Equals(expect), "Vector is not correct");
+        }
+
         private static double DistanceTo(Vector v1, Vector v2)
         {
             return Math.Sqrt(Math.Pow(v1.X - v2.X, 2) + Math.Pow(v1.Y - v2.Y, 2) + Math.Pow(v1.Z - v2.Z, 2));
