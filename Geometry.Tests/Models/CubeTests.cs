@@ -27,14 +27,14 @@ namespace StudioLE.Geometry.Tests
         }
 
         [Test]
-        public void CubeCorrect_Volume()
+        public void CubeGet_Volume()
         {
             double expect = cube.Width * cube.Length * cube.Height;
             Assert.AreEqual(expect, cube.Volume, "Volume is not correct");
         }
 
         [Test]
-        public void CubeCorrect_Mass()
+        public void CubeGet_Mass()
         {
             double density = 0.5;
             cube.Density = density;

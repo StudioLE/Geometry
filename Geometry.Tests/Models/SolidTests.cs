@@ -18,14 +18,14 @@ namespace StudioLE.Geometry.Tests
         }
 
         [Test]
-        public void SolidCorrect_Volume()
+        public void SolidGet_Volume()
         {
             double expect = 4;
             Assert.AreEqual(expect, solid.Volume, "Volume is not correct");
         }
 
         [Test]
-        public void SolidCorrect_Mass()
+        public void SolidGet_Mass()
         {
             double density = 0.5;
             solid.Density = density;

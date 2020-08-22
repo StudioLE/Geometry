@@ -15,21 +15,21 @@ namespace StudioLE.Geometry.Tests
         }
 
         [Test]
-        public void SphereCorrect_Diameter()
+        public void SphereGet_Diameter()
         {
             double expect = sphere.Radius * 2;
             Assert.AreEqual(expect, sphere.Diameter, "Diameter should be double the radius");
         }
 
         [Test]
-        public void SphereCorrect_Volume()
+        public void SphereGet_Volume()
         {
             double expect = SphereVolumeFromRadius(sphere.Radius);
             Assert.AreEqual(expect, sphere.Volume, "Volume is not correct");
         }
 
         [Test]
-        public void SphereCorrect_Mass()
+        public void SphereGet_Mass()
         {
             double density = 0.5;
             sphere.Density = density;

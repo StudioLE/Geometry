@@ -15,28 +15,28 @@ namespace StudioLE.Geometry.Tests
         }
 
         [Test]
-        public void CylinderCorrect_Radius()
+        public void CylinderGet_Radius()
         {
             double expect = cylinder.Diameter / 2;
             Assert.AreEqual(expect, cylinder.Radius, "Radius should be half the diameter");
         }
 
         [Test]
-        public void CylinderCorrect_Diameter()
+        public void CylinderGet_Diameter()
         {
             double expect = cylinder.Radius * 2;
             Assert.AreEqual(expect, cylinder.Diameter, "Diameter should be double the radius");
         }
 
         [Test]
-        public void CylinderCorrect_Volume()
+        public void CylinderGet_Volume()
         {
             double expect = VolumeFromRadiusAndHeight(cylinder.Radius, cylinder.Height);
             Assert.AreEqual(expect, cylinder.Volume, "Volume is not correct");
         }
 
         [Test]
-        public void CylinderCorrect_Mass()
+        public void CylinderGet_Mass()
         {
             double density = 0.5;
             cylinder.Density = density;
