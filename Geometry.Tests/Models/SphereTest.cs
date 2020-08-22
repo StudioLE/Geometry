@@ -21,6 +21,22 @@ namespace StudioLE.Geometry.Tests
             Assert.AreEqual(expect, sphere.Diameter, "Diameter should be double the radius");
         }
 
+        [TestCase(1)]
+        public void SphereSet_Diameter(double diameter)
+        {
+            sphere.Diameter = diameter;
+            double expect = diameter / 2;
+            Assert.AreEqual(expect, sphere.Radius, "Setting Diameter should set Radius");
+        }
+
+        [TestCase(1)]
+        public void SphereSet_Radius(double radius)
+        {
+            sphere.Radius = radius;
+            double expect = radius * 2;
+            Assert.AreEqual(expect, sphere.Diameter, "Setting Radius should set Diameter");
+        }
+
         [Test]
         public void SphereGet_Volume()
         {
