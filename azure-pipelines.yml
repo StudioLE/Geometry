@@ -22,8 +22,19 @@ pool:
 variables:
   buildConfiguration: 'Release'
   csproj: 'Geometry/Geometry.csproj'
+  solution: 'Geometry.sln'
 
 jobs:
+- job: Test
+  steps:
+  # Run tests
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'test'
+      projects: '$(solution)'
+      arguments: '-v normal'
+
+
 - job: Build
   # Set env
   steps:
