@@ -53,5 +53,19 @@ namespace StudioLE.Geometry.Tests
         {
             Assert.IsNotNull(cube as Cuboid, "Should be a Cuboid");
         }
+
+        [Test]
+        public void CubeFrom_Cuboid()
+        {
+            Cuboid cuboid = new Cuboid(3, 3, 3);
+            Assert.DoesNotThrow(() => Cube.From(cuboid), "Should create Cube from regular Cuboid");
+        }
+
+        [Test]
+        public void CubeFrom_InvalidCuboid()
+        {
+            Cuboid cuboid = new Cuboid(3, 3, 1);
+            Assert.Throws<InvalidOperationException>(() => Cube.From(cuboid), "Should not create Cube from irregular Cuboid");
+        }
     }
 }
