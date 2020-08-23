@@ -10,7 +10,7 @@ namespace StudioLE.Geometry
 
         public double Length { get; set; }
 
-        public override double Volume { get { return Width * Height * Length; } }
+        public override double Volume { get => Width * Height * Length; }
 
         public Cuboid(double width, double length, double height)
         {

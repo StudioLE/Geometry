@@ -10,7 +10,7 @@ namespace StudioLE.Geometry
 
         public double Z { get; set; }
 
-        public static Point Origin { get { return new Point(0, 0, 0); } }
+        public static Point Origin { get => new Point(0, 0, 0); }
 
         public Point(double x, double y, double z)
         {
@@ -56,13 +56,9 @@ namespace StudioLE.Geometry
         }
 
         public bool Equals(Point p2)
-        {
-            return X == p2.X && Y == p2.Y && Z == p2.Z;
-        }
+            => X == p2.X && Y == p2.Y && Z == p2.Z;
 
         public double DistanceTo(Point p2)
-        {
-            return Math.Sqrt(Math.Pow(X - p2.X, 2) + Math.Pow(Y - p2.Y, 2) + Math.Pow(Z - p2.Z, 2));
-        }
+            => Math.Sqrt(Math.Pow(X - p2.X, 2) + Math.Pow(Y - p2.Y, 2) + Math.Pow(Z - p2.Z, 2));
     }
 }
