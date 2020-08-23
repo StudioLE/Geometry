@@ -53,7 +53,7 @@ namespace StudioLE.Geometry
 
         public double DistanceTo(Vector v2)
         {
-            return DistanceTo(v2);
+            return DistanceTo(v2 as Point);
         }
     }
 }
