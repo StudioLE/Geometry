@@ -27,15 +27,14 @@ variables:
 jobs:
 - job: Test
   steps:
-  # Run tests
   - task: DotNetCoreCLI@2
+    displayName: 'Run Tests'
     inputs:
       command: 'test'
       projects: '$(solution)'
       arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage/'
-  # Publish Coverage
   - task: PublishCodeCoverageResults@1
-    displayName: 'Publish Code Coverage Results'
+    displayName: 'Publish Coverage'
     inputs:
       codeCoverageTool: 'Cobertura'
       summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage/coverage.cobertura.xml'
@@ -44,9 +43,9 @@ jobs:
 
 - job: Build
   dependsOn: Test
-  # Set env
   steps:
   - task: CmdLine@2
+    displayName: 'Set Env Variables'
     inputs:
       script: |
         echo $(Build.SourceVersion)
@@ -61,19 +60,18 @@ jobs:
         set  VersionNumber=%BuildNumber%-%Hash%
         echo ##vso[task.setvariable variable=VersionNumber]%VersionNumber%
   # - task: Bash@3
+  #   displayName: 'Print Env Variables'
   #   inputs:
   #     targetType: 'inline'
   #     script: 'env | sort'
-  # Build
   - task: DotNetCoreCLI@2
-    displayName: 'dotnet build'
+    displayName: 'Build Project'
     inputs:
       command: 'build'
       arguments: '--configuration $(buildConfiguration)'
       projects: '$(csproj)'
-  # Pack Canary NuGet
   - task: DotNetCoreCLI@2
-    displayName: "dotnet pack"
+    displayName: 'Pack Canary NuGet'
     inputs:
       command: 'pack'
       packagesToPack: '$(csproj)'
@@ -81,23 +79,22 @@ jobs:
       nobuild: true
       versioningScheme: 'byEnvVar'
       versionEnvVar: 'VERSIONNUMBER'
-  # Publish Canary NuGet Artifact
   - task: PublishPipelineArtifact@1
+    displayName: 'Publish Canary NuGet Artifact'
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)/Canary'
       artifact: 'Canary'
       publishLocation: 'pipeline'
-  # Pack Release NuGet
   - task: DotNetCoreCLI@2
-    displayName: "dotnet pack"
+    displayName: 'Pack Release NuGet'
     inputs:
       command: 'pack'
       packagesToPack: '$(csproj)'
       packDirectory: '$(Build.ArtifactStagingDirectory)/Release'
       nobuild: true
       versioningScheme: 'off'
-  # Publish Release NuGet Artifact
   - task: PublishPipelineArtifact@1
+    displayName: 'Publish Release NuGet Artifact'
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)/Release'
       artifact: 'Release'
@@ -105,10 +102,11 @@ jobs:
 
 
 - job: Deploy_Canary
+  displayName: 'Deploy Canary'
   dependsOn: Build
   steps:
-  # Download NuGet Artifact
   - task: DownloadPipelineArtifact@2
+    displayName: 'Download NuGet Artifact'
     inputs:
       buildType: 'current'
       artifactName: 'Canary'
@@ -116,9 +114,8 @@ jobs:
         *.nupkg
         !*.symbols.nupkg
       targetPath: '$(Pipeline.Workspace)'
-  # Deploy to Feed
   - task: NuGetCommand@2
-    displayName: 'nuget push'
+    displayName: 'Deploy to Canary Feed'
     inputs:
       command: 'push'
       packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
