@@ -19,22 +19,12 @@ namespace StudioLE.Geometry
 
         public static Angle operator +(Angle a1, Angle a2)
         {
-            return (Angle)a1.Degrees + a2.Degrees;
+            return (a1.Degrees + a2.Degrees);
         }
 
         public static Angle operator -(Angle a1, Angle a2)
         {
-            return (Angle)a1.Degrees - a2.Degrees;
-        }
-
-        public static Angle operator *(Angle a1, Angle a2)
-        {
-            return (Angle)a1.Degrees * a2.Degrees;
-        }
-
-        public static Angle operator /(Angle a1, Angle a2)
-        {
-            return (Angle)a1.Degrees / a2.Degrees;
+            return (a1.Degrees - a2.Degrees);
         }
 
         public static bool operator <(Angle a1, Angle a2)
