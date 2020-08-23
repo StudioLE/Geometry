@@ -1,4 +1,4 @@
-﻿# Geometry
+﻿# StudioLE.Geometry
 
 Feed | Status 
 ------- | -------
@@ -8,6 +8,10 @@ Latest GitHub Release | [![GitHub release](https://img.shields.io/github/v/relea
 Azure Pipeline Build |  [![Build Status](https://dev.azure.com/StudioLE/Geometry/_apis/build/status/StudioLE.Geometry?branchName=master)](https://dev.azure.com/StudioLE/Geometry/_build/latest?definitionId=1&branchName=master)
 Azure Pipeline Coverage | [![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/StudioLE/Geometry/1/master)](https://dev.azure.com/StudioLE/Geometry/_build/latest?definitionId=1&branchName=master)
 Azure Pipeline Tests | [![Azure DevOps tests (branch)](https://img.shields.io/azure-devops/tests/StudioLE/Geometry/1/master)](https://dev.azure.com/StudioLE/Geometry/_build/latest?definitionId=1&branchName=master)
+
+This project is a sandbox for experimenting with C#, Azure Pipelines, NuGet, and  other tools.
+
+If you're looking for an actual geometry library you should probably look elsewhere.
 
 ## Contributing
 
