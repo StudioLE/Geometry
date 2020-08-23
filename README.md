@@ -7,3 +7,12 @@ Production | [![StudioLE.Geometry package in Production feed in Azure Artifacts]
 Build |  [![Build Status](https://dev.azure.com/StudioLE/Geometry/_apis/build/status/StudioLE.Geometry?branchName=master)](https://dev.azure.com/StudioLE/Geometry/_build/latest?definitionId=1&branchName=master)
 Coverage | ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/StudioLE/Geometry/1/master)
 Tests | ![Azure DevOps tests (branch)](https://img.shields.io/azure-devops/tests/StudioLE/Geometry/1/master)
+
+## Contributing
+
+The `master` branch is protected to ensure the commit history is clean and linear.
+- Contributions should be made to a new branch and a pull request created.
+- Pull request checks must pass before merging. 
+- If changes are minimal, merge should be by `squash`.
+- Otherwise, merge by `rebase` (learn more about [Merging vs. Rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)).
+- Never, use merge commit.
