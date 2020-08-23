@@ -36,6 +36,7 @@ jobs:
 
 
 - job: Build
+  dependsOn: Test
   # Set env
   steps:
   - task: CmdLine@2
