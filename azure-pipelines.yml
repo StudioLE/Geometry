@@ -32,7 +32,7 @@ jobs:
     inputs:
       command: 'test'
       projects: '$(solution)'
-      arguments: '-v normal'
+      arguments: '-v normal --collect "Code coverage"'
 
 
 - job: Build
