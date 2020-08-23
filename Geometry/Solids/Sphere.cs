@@ -8,15 +8,13 @@ namespace StudioLE.Geometry
 
         public double Diameter
         { 
-            get { return Radius * 2; }
-            set { Radius = value / 2; }
+            get => Radius * 2;
+            set => Radius = value / 2;
         }
 
-        public override double Volume { get { return (4 / 3) * Math.PI * Math.Pow(Radius, 3); } }
+        public override double Volume { get => (4 / 3) * Math.PI * Math.Pow(Radius, 3); }
 
         public Sphere(double radius)
-        {
-            Radius = radius;
-        }
+            => Radius = radius;
     }
 }

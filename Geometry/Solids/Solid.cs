@@ -11,6 +11,6 @@ namespace StudioLE.Geometry
 
         public virtual double Volume { get; set; }
 
-        public double Mass { get { return Volume * Density; } }
+        public double Mass { get => Volume * Density; }
     }
 }
