@@ -47,9 +47,9 @@ namespace StudioLE.Geometry.Tests
         }
 
         [Test]
-        public void VectorIsNot_Point()
+        public void VectorIs_Point()
         {
-            Assert.IsNull(vector as Point, "Should not be a Point");
+            Assert.IsNotNull(vector as Point, "Should be a Point");
         }
 
         [Test]
