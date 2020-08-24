@@ -21,7 +21,7 @@ pool:
 # just the build configuration is defined, in this case we are building Release packages
 variables:
   buildConfiguration: 'Release'
-  csproj: 'Geometry/Geometry.csproj'
+  csproj: 'src/Geometry.csproj'
   solution: 'Geometry.sln'
 
 jobs:
