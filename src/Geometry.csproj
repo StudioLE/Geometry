@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>StudioLE.Geometry</AssemblyName>
     <Authors>Laurence Elsdon</Authors>
     <Company>StudioLE</Company>
     <PackageProjectUrl>https://github.com/StudioLE/Geometry</PackageProjectUrl>
