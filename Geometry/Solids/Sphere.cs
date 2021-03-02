@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StudioLE.Geometry
+namespace StudioLE.Geometry.Solids
 {
     public class Sphere : Solid
     {
@@ -8,13 +8,13 @@ namespace StudioLE.Geometry
 
         public double Diameter
         { 
-            get => Radius * 2;
-            set => Radius = value / 2;
+            get => this.Radius * 2;
+            set => this.Radius = value / 2;
         }
 
-        public override double Volume { get => (4 / 3) * Math.PI * Math.Pow(Radius, 3); }
+        public override double Volume => (4 / 3d) * Math.PI * Math.Pow(this.Radius, 3);
 
         public Sphere(double radius)
-            => Radius = radius;
+            => this.Radius = radius;
     }
 }

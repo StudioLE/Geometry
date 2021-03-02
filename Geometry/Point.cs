@@ -14,9 +14,9 @@ namespace StudioLE.Geometry
 
         public Point(double x, double y, double z)
         {
-            X = x;
-            Y = y;
-            Z = z;
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
         }
 
         public static Point operator +(Point p1, Point p2)
@@ -56,9 +56,9 @@ namespace StudioLE.Geometry
         }
 
         public bool Equals(Point p2)
-            => X == p2.X && Y == p2.Y && Z == p2.Z;
+            => this.X == p2.X && this.Y == p2.Y && this.Z == p2.Z;
 
         public double DistanceTo(Point p2)
-            => Math.Sqrt(Math.Pow(X - p2.X, 2) + Math.Pow(Y - p2.Y, 2) + Math.Pow(Z - p2.Z, 2));
+            => Math.Sqrt(Math.Pow(this.X - p2.X, 2) + Math.Pow(this.Y - p2.Y, 2) + Math.Pow(this.Z - p2.Z, 2));
     }
 }

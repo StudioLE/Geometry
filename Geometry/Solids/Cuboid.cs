@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace StudioLE.Geometry
+﻿namespace StudioLE.Geometry.Solids
 {
     public class Cuboid : Solid
     {
@@ -10,13 +8,13 @@ namespace StudioLE.Geometry
 
         public double Length { get; set; }
 
-        public override double Volume { get => Width * Height * Length; }
+        public override double Volume { get => this.Width * this.Height * this.Length; }
 
         public Cuboid(double width, double length, double height)
         {
-            Width = width;
-            Length = length;
-            Height = height;
+            this.Width = width;
+            this.Length = length;
+            this.Height = height;
         }
     }
 }

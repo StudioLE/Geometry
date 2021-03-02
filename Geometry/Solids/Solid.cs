@@ -1,7 +1,6 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 
-namespace StudioLE.Geometry
+namespace StudioLE.Geometry.Solids
 {
     public class Solid
     {
@@ -11,6 +10,6 @@ namespace StudioLE.Geometry
 
         public virtual double Volume { get; set; }
 
-        public double Mass { get => Volume * Density; }
+        public double Mass { get => this.Volume * this.Density; }
     }
 }

@@ -1,7 +1,9 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
+using NUnit.Framework;
+using StudioLE.Geometry.Solids;
+// ReSharper disable RedundantCast
 
-namespace StudioLE.Geometry.Tests
+namespace StudioLE.Geometry.Tests.Vectors
 {
     [TestFixture]
     public class VectorTests
@@ -11,7 +13,7 @@ namespace StudioLE.Geometry.Tests
         [SetUp]
         public void Setup()
         {
-            vector = new Vector(3, 2, 1);
+            this.vector = new Vector(3, 2, 1);
         }
 
         [TestCase(3, 2, 1)]
@@ -49,25 +51,25 @@ namespace StudioLE.Geometry.Tests
         [Test]
         public void VectorIs_Point()
         {
-            Assert.IsNotNull(vector as Point, "Should be a Point");
+            Assert.IsNotNull(this.vector as Point, "Should be a Point");
         }
 
         [Test]
         public void Vector_Distance()
         {
             Cuboid cuboid = new Cuboid(3, 3, 3);
-            Assert.DoesNotThrow(() => { double test = vector.Distance; }, "Should have Distance");
+            Assert.DoesNotThrow(() => { double test = this.vector.Distance; }, "Should have Distance");
         }
 
         [TestCase(1, 2, 3)]
         public void Vector_VectorAddition(double x, double y, double z)
         {
             Vector v2 = new Vector(x, y, z);
-            Vector v3 = vector + v2;
+            Vector v3 = this.vector + v2;
             Vector expect = new Vector(
-                vector.X + v2.X,
-                vector.Y + v2.Y,
-                vector.Z + v2.Z
+                this.vector.X + v2.X,
+                this.vector.Y + v2.Y,
+                this.vector.Z + v2.Z
             );
             Assert.IsTrue(v3.Equals(expect), "Vector is not correct");
         }
@@ -76,11 +78,11 @@ namespace StudioLE.Geometry.Tests
         public void Vector_VectorSubtraction(double x, double y, double z)
         {
             Vector v2 = new Vector(x, y, z);
-            Vector v3 = vector - v2;
+            Vector v3 = this.vector - v2;
             Vector expect = new Vector(
-                vector.X - v2.X,
-                vector.Y - v2.Y,
-                vector.Z - v2.Z
+                this.vector.X - v2.X,
+                this.vector.Y - v2.Y,
+                this.vector.Z - v2.Z
             );
             Assert.IsTrue(v3.Equals(expect), "Vector is not correct");
         }
@@ -89,11 +91,11 @@ namespace StudioLE.Geometry.Tests
         public void Vector_VectorMultiplication(double x, double y, double z)
         {
             Vector v2 = new Vector(x, y, z);
-            Vector v3 = vector * v2;
+            Vector v3 = this.vector * v2;
             Vector expect = new Vector(
-                vector.X * v2.X,
-                vector.Y * v2.Y,
-                vector.Z * v2.Z
+                this.vector.X * v2.X,
+                this.vector.Y * v2.Y,
+                this.vector.Z * v2.Z
             );
             Assert.IsTrue(v3.Equals(expect), "Vector is not correct");
         }
@@ -102,11 +104,11 @@ namespace StudioLE.Geometry.Tests
         public void Vector_VectorDivision(double x, double y, double z)
         {
             Vector v2 = new Vector(x, y, z);
-            Vector v3 = vector / v2;
+            Vector v3 = this.vector / v2;
             Vector expect = new Vector(
-                vector.X / v2.X,
-                vector.Y / v2.Y,
-                vector.Z / v2.Z
+                this.vector.X / v2.X,
+                this.vector.Y / v2.Y,
+                this.vector.Z / v2.Z
             );
             Assert.IsTrue(v3.Equals(expect), "Vector is not correct");
         }

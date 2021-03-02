@@ -1,7 +1,8 @@
 ﻿using NUnit.Framework;
-using System;
+using StudioLE.Geometry.Solids;
+// ReSharper disable RedundantCast
 
-namespace StudioLE.Geometry.Tests
+namespace StudioLE.Geometry.Tests.Solids
 {
     [TestFixture]
     public class CuboidTests
@@ -11,29 +12,29 @@ namespace StudioLE.Geometry.Tests
         [SetUp]
         public void Setup()
         {
-            cuboid = new Cuboid(3, 2, 1);
+            this.cuboid = new Cuboid(3, 2, 1);
         }
 
         [Test]
         public void CuboidGet_Volume()
         {
-            double expect = cuboid.Width * cuboid.Length * cuboid.Height;
-            Assert.AreEqual(expect, cuboid.Volume, "Volume is not correct");
+            double expect = this.cuboid.Width * this.cuboid.Length * this.cuboid.Height;
+            Assert.AreEqual(expect, this.cuboid.Volume, "Volume is not correct");
         }
 
         [Test]
         public void CuboidGet_Mass()
         {
             double density = 0.5;
-            cuboid.Density = density;
-            double expect = cuboid.Width * cuboid.Length * cuboid.Height * density;
-            Assert.AreEqual(expect, cuboid.Mass, "Mass is not correct");
+            this.cuboid.Density = density;
+            double expect = this.cuboid.Width * this.cuboid.Length * this.cuboid.Height * density;
+            Assert.AreEqual(expect, this.cuboid.Mass, "Mass is not correct");
         }
 
         [Test]
         public void CuboidIs_Solid()
         {
-            Assert.IsNotNull(cuboid as Solid, "Should be a Solid");
+            Assert.IsNotNull(this.cuboid as Solid, "Should be a Solid");
         }
     }
 }

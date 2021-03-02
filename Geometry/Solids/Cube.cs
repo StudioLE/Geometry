@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StudioLE.Geometry
+namespace StudioLE.Geometry.Solids
 {
     public class Cube : Cuboid
     {

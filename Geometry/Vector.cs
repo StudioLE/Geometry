@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace StudioLE.Geometry
+﻿namespace StudioLE.Geometry
 {
     public class Vector : Point
     {
@@ -10,9 +8,9 @@ namespace StudioLE.Geometry
 
         public Vector(double x, double y, double z) : base(x, y, z)
         {
-            X = x;
-            Y = y;
-            Z = z;
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
         }
 
         public static Vector operator +(Vector v1, Vector v2)
