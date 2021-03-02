@@ -1,17 +1,23 @@
 ﻿using System;
+using UnitsNet;
+using UnitsNet.NumberExtensions.NumberToVolume;
 
-namespace StudioLE.Geometry
+namespace StudioLE.Geometry.Solids
 {
     public class Cylinder : Sphere
     {
-        public double Height { get; set; }
+        public Length Height { get; set; }
 
-        public override double Volume { get => Math.PI * Radius * Height; }
+        public override Volume Volume => CalculateVolume(this.Radius, this.Height);
 
-        public Cylinder(double radius, double height) : base(radius)
+        public Cylinder(Length radius, Length height) : base(radius)
         {
-            Radius = radius;
-            Height = height;
+            this.Height = height;
+        }
+
+        private static Volume CalculateVolume(Length radius, Length height)
+        {
+            return (Math.PI * Math.Pow(radius.Meters, 2) * height.Meters).CubicMeters();
         }
     }
 }

@@ -1,7 +1,13 @@
-using NUnit.Framework;
 using System;
+using NUnit.Framework;
+using StudioLE.Geometry.Solids;
+using UnitsNet;
+using UnitsNet.NumberExtensions.NumberToLength;
+using UnitsNet.NumberExtensions.NumberToDensity;
 
-namespace StudioLE.Geometry.Tests
+// ReSharper disable RedundantCast
+
+namespace StudioLE.Geometry.Tests.Solids
 {
     [TestFixture]
     public class CubeTests
@@ -11,60 +17,60 @@ namespace StudioLE.Geometry.Tests
         [SetUp]
         public void Setup()
         {
-            cube = new Cube(3);
+            this.cube = new Cube(3.Meters());
         }
 
         [Test]
         public void CubeEqual_WidthLength()
         {
-            Assert.AreEqual(cube.Width, cube.Length, "Length not equal to width");
+            Assert.AreEqual(this.cube.Width, this.cube.Length, "Length not equal to width");
         }
 
         [Test]
         public void CubeEqual_WidthHeight()
         {
-            Assert.AreEqual(cube.Width, cube.Height, "Height not equal to width");
+            Assert.AreEqual(this.cube.Width, this.cube.Height, "Height not equal to width");
         }
 
         [Test]
         public void CubeGet_Volume()
         {
-            double expect = cube.Width * cube.Length * cube.Height;
-            Assert.AreEqual(expect, cube.Volume, "Volume is not correct");
+            Volume expect = this.cube.Width * this.cube.Length * this.cube.Height;
+            Assert.AreEqual(expect, this.cube.Volume, "Volume is not correct");
         }
 
         [Test]
         public void CubeGet_Mass()
         {
-            double density = 0.5;
-            cube.Density = density;
-            double expect = cube.Width * cube.Length * cube.Height * density;
-            Assert.AreEqual(expect, cube.Mass, "Mass is not correct");
+            Density density = 0.5.KilogramsPerCubicMeter();
+            this.cube.Density = density;
+            Mass expect = this.cube.Width * this.cube.Length * this.cube.Height * density;
+            Assert.AreEqual(expect, this.cube.Mass, "Mass is not correct");
         }
 
         [Test]
         public void CubeIs_Solid()
         {
-            Assert.IsNotNull(cube as Solid, "Should be a Solid");
+            Assert.IsNotNull(this.cube as Solid, "Should be a Solid");
         }
 
         [Test]
         public void CubeIs_Cuboid()
         {
-            Assert.IsNotNull(cube as Cuboid, "Should be a Cuboid");
+            Assert.IsNotNull(this.cube as Cuboid, "Should be a Cuboid");
         }
 
         [Test]
         public void CubeFrom_Cuboid()
         {
-            Cuboid cuboid = new Cuboid(3, 3, 3);
+            Cuboid cuboid = new Cuboid(3.Meters(), 3.Meters(), 3.Meters());
             Assert.DoesNotThrow(() => Cube.From(cuboid), "Should create Cube from regular Cuboid");
         }
 
         [Test]
         public void CubeFrom_InvalidCuboid()
         {
-            Cuboid cuboid = new Cuboid(3, 3, 1);
+            Cuboid cuboid = new Cuboid(3.Meters(), 3.Meters(), 1.Meters());
             Assert.Throws<InvalidOperationException>(() => Cube.From(cuboid), "Should not create Cube from irregular Cuboid");
         }
     }

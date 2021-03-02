@@ -1,12 +1,12 @@
 ﻿using System;
+using UnitsNet;
 
-namespace StudioLE.Geometry
+namespace StudioLE.Geometry.Solids
 {
     public class Cube : Cuboid
     {
-        public Cube(double length) : base(length, length, length)
+        public Cube(Length length) : base(length, length, length)
         {
-
         }
 
         public static Cube From(Cuboid cuboid)

@@ -1,7 +1,12 @@
 ﻿using NUnit.Framework;
-using System;
+using StudioLE.Geometry.Solids;
+using UnitsNet;
+using UnitsNet.NumberExtensions.NumberToDensity;
+using UnitsNet.NumberExtensions.NumberToVolume;
 
-namespace StudioLE.Geometry.Tests
+// ReSharper disable RedundantCast
+
+namespace StudioLE.Geometry.Tests.Solids
 {
     [TestFixture]
     public class SolidTests
@@ -11,44 +16,44 @@ namespace StudioLE.Geometry.Tests
         [SetUp]
         public void Setup()
         {
-            solid = new Solid()
+            this.solid = new Solid
             {
-                Volume = 4
+                Volume = 4.CubicMeters()
             };
         }
 
         [Test]
         public void SolidGet_Volume()
         {
-            double expect = 4;
-            Assert.AreEqual(expect, solid.Volume, "Volume is not correct");
+            Volume expect = 4.CubicMeters();
+            Assert.AreEqual(expect, this.solid.Volume, "Volume is not correct");
         }
 
         [Test]
         public void SolidGet_Mass()
         {
-            double density = 0.5;
-            solid.Density = density;
-            double expect = solid.Volume * density;
-            Assert.AreEqual(expect, solid.Mass, "Mass is not correct");
+            Density density = 0.5.KilogramsPerCubicMeter();
+            this.solid.Density = density;
+            Mass expect = this.solid.Volume * density;
+            Assert.AreEqual(expect, this.solid.Mass, "Mass is not correct");
         }
 
         [Test]
         public void SolidIs_Solid()
         {
-            Assert.IsNotNull(solid as Solid, "Should be a Solid");
+            Assert.IsNotNull(this.solid as Solid, "Should be a Solid");
         }
 
         [Test]
         public void SolidIsNot_Cuboid()
         {
-            Assert.IsNull(solid as Cuboid, "Should not be a Cuboid");
+            Assert.IsNull(this.solid as Cuboid, "Should not be a Cuboid");
         }
 
         [Test]
         public void SolidIsNot_Sphere()
         {
-            Assert.IsNull(solid as Sphere, "Should not be a Sphere");
+            Assert.IsNull(this.solid as Sphere, "Should not be a Sphere");
         }
     }
 }
