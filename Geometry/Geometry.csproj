@@ -12,4 +12,8 @@
     <Description>This project is a sandbox for experimenting with C#, Azure Pipelines, NuGet, and other tools. If you're looking for an actual geometry library you should probably look elsewhere.</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="UnitsNet.NumberExtensions" Version="4.85.0" />
+  </ItemGroup>
+
 </Project>
