@@ -1,5 +1,9 @@
 ﻿using NUnit.Framework;
 using StudioLE.Geometry.Solids;
+using UnitsNet;
+using UnitsNet.NumberExtensions.NumberToDensity;
+using UnitsNet.NumberExtensions.NumberToVolume;
+
 // ReSharper disable RedundantCast
 
 namespace StudioLE.Geometry.Tests.Solids
@@ -12,25 +16,25 @@ namespace StudioLE.Geometry.Tests.Solids
         [SetUp]
         public void Setup()
         {
-            this.solid = new Solid()
+            this.solid = new Solid
             {
-                Volume = 4
+                Volume = 4.CubicMeters()
             };
         }
 
         [Test]
         public void SolidGet_Volume()
         {
-            double expect = 4;
+            Volume expect = 4.CubicMeters();
             Assert.AreEqual(expect, this.solid.Volume, "Volume is not correct");
         }
 
         [Test]
         public void SolidGet_Mass()
         {
-            double density = 0.5;
+            Density density = 0.5.KilogramsPerCubicMeter();
             this.solid.Density = density;
-            double expect = this.solid.Volume * density;
+            Mass expect = this.solid.Volume * density;
             Assert.AreEqual(expect, this.solid.Mass, "Mass is not correct");
         }
 

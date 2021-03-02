@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using UnitsNet;
+using UnitsNet.NumberExtensions.NumberToDensity;
 
 namespace StudioLE.Geometry.Solids
 {
@@ -6,10 +8,10 @@ namespace StudioLE.Geometry.Solids
     {
         public Color Color { get; set; } = Color.Black;
 
-        public double Density { get; set; } = 1;
+        public Density Density { get; set; } = 1.GramsPerCubicCentimeter();
 
-        public virtual double Volume { get; set; }
+        public virtual Volume Volume { get; set; }
 
-        public double Mass { get => this.Volume * this.Density; }
+        public Mass Mass => this.Volume * this.Density;
     }
 }

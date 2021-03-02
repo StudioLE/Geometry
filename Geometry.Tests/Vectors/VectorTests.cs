@@ -1,6 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
-using StudioLE.Geometry.Solids;
+using UnitsNet;
+using UnitsNet.NumberExtensions.NumberToLength;
+
 // ReSharper disable RedundantCast
 
 namespace StudioLE.Geometry.Tests.Vectors
@@ -13,38 +15,38 @@ namespace StudioLE.Geometry.Tests.Vectors
         [SetUp]
         public void Setup()
         {
-            this.vector = new Vector(3, 2, 1);
+            this.vector = new Vector(3.Meters(), 2.Meters(), 1.Meters());
         }
 
         [TestCase(3, 2, 1)]
         public void VectorGet_Distance(double x, double y, double z)
         {
-            Vector v1 = new Vector(x, y, z);
-            double expect = DistanceTo(Vector.Origin, v1);
+            var v1 = new Vector(x.Meters(), y.Meters(), z.Meters());
+            Length expect = DistanceTo(Vector.Origin, v1);
             Assert.AreEqual(expect, v1.Distance, "Distance is not correct");
         }
 
         [TestCase(2)]
         public void VectorGet_DistanceX(double x)
         {
-            double expect = x;
-            Vector v1 = new Vector(x, 0, 0);
+            Length expect = x.Meters();
+            var v1 = new Vector(x.Meters(), 0.Meters(), 0.Meters());
             Assert.AreEqual(expect, v1.Distance, "Distance is not correct");
         }
 
         [TestCase(2)]
         public void VectorGet_DistanceY(double y)
         {
-            double expect = y;
-            Vector v1 = new Vector(0, y, 0);
+            Length expect = y.Meters();
+            var v1 = new Vector(0.Meters(), y.Meters(), 0.Meters());
             Assert.AreEqual(expect, v1.Distance, "Distance is not correct");
         }
 
         [TestCase(2)]
         public void VectorGet_DistanceZ(double z)
         {
-            double expect = z;
-            Vector v1 = new Vector(0, 0, z);
+            Length expect = z.Meters();
+            var v1 = new Vector(0.Meters(), 0.Meters(), z.Meters());
             Assert.AreEqual(expect, v1.Distance, "Distance is not correct");
         }
 
@@ -57,16 +59,15 @@ namespace StudioLE.Geometry.Tests.Vectors
         [Test]
         public void Vector_Distance()
         {
-            Cuboid cuboid = new Cuboid(3, 3, 3);
-            Assert.DoesNotThrow(() => { double test = this.vector.Distance; }, "Should have Distance");
+            Assert.DoesNotThrow(() => { Length test = this.vector.Distance; }, "Should have Distance");
         }
 
         [TestCase(1, 2, 3)]
         public void Vector_VectorAddition(double x, double y, double z)
         {
-            Vector v2 = new Vector(x, y, z);
+            var v2 = new Vector(x.Meters(), y.Meters(), z.Meters());
             Vector v3 = this.vector + v2;
-            Vector expect = new Vector(
+            var expect = new Vector(
                 this.vector.X + v2.X,
                 this.vector.Y + v2.Y,
                 this.vector.Z + v2.Z
@@ -77,9 +78,9 @@ namespace StudioLE.Geometry.Tests.Vectors
         [TestCase(1, 2, 3)]
         public void Vector_VectorSubtraction(double x, double y, double z)
         {
-            Vector v2 = new Vector(x, y, z);
+            var v2 = new Vector(x.Meters(), y.Meters(), z.Meters());
             Vector v3 = this.vector - v2;
-            Vector expect = new Vector(
+            var expect = new Vector(
                 this.vector.X - v2.X,
                 this.vector.Y - v2.Y,
                 this.vector.Z - v2.Z
@@ -90,12 +91,12 @@ namespace StudioLE.Geometry.Tests.Vectors
         [TestCase(1, 2, 3)]
         public void Vector_VectorMultiplication(double x, double y, double z)
         {
-            Vector v2 = new Vector(x, y, z);
+            var v2 = new Vector(x.Meters(), y.Meters(), z.Meters());
             Vector v3 = this.vector * v2;
             Vector expect = new Vector(
-                this.vector.X * v2.X,
-                this.vector.Y * v2.Y,
-                this.vector.Z * v2.Z
+                (this.vector.X.Meters * v2.X.Meters).Meters(),
+                (this.vector.Y.Meters * v2.Y.Meters).Meters(),
+                (this.vector.Z.Meters * v2.Z.Meters).Meters()
             );
             Assert.IsTrue(v3.Equals(expect), "Vector is not correct");
         }
@@ -103,19 +104,22 @@ namespace StudioLE.Geometry.Tests.Vectors
         [TestCase(1, 2, 3)]
         public void Vector_VectorDivision(double x, double y, double z)
         {
-            Vector v2 = new Vector(x, y, z);
+            var v2 = new Vector(x.Meters(), y.Meters(), z.Meters());
             Vector v3 = this.vector / v2;
-            Vector expect = new Vector(
-                this.vector.X / v2.X,
-                this.vector.Y / v2.Y,
-                this.vector.Z / v2.Z
+            var expect = new Vector(
+                (this.vector.X.Meters / v2.X.Meters).Meters(),
+                (this.vector.Y.Meters / v2.Y.Meters).Meters(),
+                (this.vector.Z.Meters / v2.Z.Meters).Meters()
             );
             Assert.IsTrue(v3.Equals(expect), "Vector is not correct");
         }
 
-        private static double DistanceTo(Vector v1, Vector v2)
+        private static Length DistanceTo(Vector p1, Vector p2)
         {
-            return Math.Sqrt(Math.Pow(v1.X - v2.X, 2) + Math.Pow(v1.Y - v2.Y, 2) + Math.Pow(v1.Z - v2.Z, 2));
+            double x = Math.Pow((p1.X - p2.X).Meters, 2);
+            double y = Math.Pow((p1.Y - p2.Y).Meters, 2);
+            double z = Math.Pow((p1.Z - p2.Z).Meters, 2);
+            return Math.Sqrt(x + y + z).Meters();
         }
     }
 }

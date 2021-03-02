@@ -1,5 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
+using UnitsNet;
+using UnitsNet.NumberExtensions.NumberToLength;
 
 namespace StudioLE.Geometry.Tests.Vectors
 {
@@ -11,22 +13,22 @@ namespace StudioLE.Geometry.Tests.Vectors
         [SetUp]
         public void Setup()
         {
-            this.point = new Point(3, 2, 1);
+            this.point = new Point(3.Meters(), 2.Meters(), 1.Meters());
         }
 
         [TestCase(3, 2, 1)]
         public void PointGet_DistanceToOrigin(double x, double y, double z)
         {
-            Point p1 = new Point(x, y, z);
-            double expect = DistanceBetween(Point.Origin, p1);
+            var p1 = new Point(x.Meters(), y.Meters(), z.Meters());
+            Length expect = DistanceTo(Point.Origin, p1);
             Assert.AreEqual(expect, Point.Origin.DistanceTo(p1), "Distance is not correct");
         }
 
         [TestCase(1, 2, 3)]
         public void PointGet_DistanceTo(double x, double y, double z)
         {
-            Point p1 = new Point(x, y, z);
-            double expect = DistanceBetween(this.point, p1);
+            var p1 = new Point(x.Meters(), y.Meters(), z.Meters());
+            Length expect = DistanceTo(this.point, p1);
             Assert.AreEqual(expect, this.point.DistanceTo(p1), "Distance is not correct");
         }
 
@@ -39,9 +41,9 @@ namespace StudioLE.Geometry.Tests.Vectors
         [TestCase(1, 2, 3)]
         public void Point_PointAddition(double x, double y, double z)
         {
-            Point p2 = new Point(x, y, z);
+            var p2 = new Point(x.Meters(), y.Meters(), z.Meters());
             Point p3 = this.point + p2;
-            Point expect = new Point(
+            var expect = new Point(
                 this.point.X + p2.X,
                 this.point.Y + p2.Y,
                 this.point.Z + p2.Z
@@ -52,9 +54,9 @@ namespace StudioLE.Geometry.Tests.Vectors
         [TestCase(1, 2, 3)]
         public void Point_PointSubtraction(double x, double y, double z)
         {
-            Point p2 = new Point(x, y, z);
+            var p2 = new Point(x.Meters(), y.Meters(), z.Meters());
             Point p3 = this.point - p2;
-            Point expect = new Point(
+            var expect = new Point(
                 this.point.X - p2.X,
                 this.point.Y - p2.Y,
                 this.point.Z - p2.Z
@@ -65,12 +67,12 @@ namespace StudioLE.Geometry.Tests.Vectors
         [TestCase(1, 2, 3)]
         public void Point_PointMultiplication(double x, double y, double z)
         {
-            Point p2 = new Point(x, y, z);
+            var p2 = new Point(x.Meters(), y.Meters(), z.Meters());
             Point p3 = this.point * p2;
-            Point expect = new Point(
-                this.point.X * p2.X,
-                this.point.Y * p2.Y,
-                this.point.Z * p2.Z
+            var expect = new Point(
+                (this.point.X.Meters * p2.X.Meters).Meters(),
+                (this.point.Y.Meters * p2.Y.Meters).Meters(),
+                (this.point.Z.Meters * p2.Z.Meters).Meters()
             );
             Assert.IsTrue(p3.Equals(expect), "Point is not correct");
         }
@@ -78,19 +80,22 @@ namespace StudioLE.Geometry.Tests.Vectors
         [TestCase(1, 2, 3)]
         public void Point_PointDivision(double x, double y, double z)
         {
-            Point p2 = new Point(x, y, z);
+            var p2 = new Point(x.Meters(), y.Meters(), z.Meters());
             Point p3 = this.point / p2;
-            Point expect = new Point(
-                this.point.X / p2.X,
-                this.point.Y / p2.Y,
-                this.point.Z / p2.Z
+            var expect = new Point(
+                (this.point.X.Meters / p2.X.Meters).Meters(),
+                (this.point.Y.Meters / p2.Y.Meters).Meters(),
+                (this.point.Z.Meters / p2.Z.Meters).Meters()
             );
             Assert.IsTrue(p3.Equals(expect), "Point is not correct");
         }
 
-        private static double DistanceBetween(Point p1, Point p2)
+        private static Length DistanceTo(Point p1, Point p2)
         {
-            return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2) + Math.Pow(p1.Z - p2.Z, 2));
+            double x = Math.Pow((p1.X - p2.X).Meters, 2);
+            double y = Math.Pow((p1.Y - p2.Y).Meters, 2);
+            double z = Math.Pow((p1.Z - p2.Z).Meters, 2);
+            return Math.Sqrt(x + y + z).Meters();
         }
     }
 }

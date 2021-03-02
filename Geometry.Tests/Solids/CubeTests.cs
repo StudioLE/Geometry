@@ -1,6 +1,10 @@
 using System;
 using NUnit.Framework;
 using StudioLE.Geometry.Solids;
+using UnitsNet;
+using UnitsNet.NumberExtensions.NumberToLength;
+using UnitsNet.NumberExtensions.NumberToDensity;
+
 // ReSharper disable RedundantCast
 
 namespace StudioLE.Geometry.Tests.Solids
@@ -13,7 +17,7 @@ namespace StudioLE.Geometry.Tests.Solids
         [SetUp]
         public void Setup()
         {
-            this.cube = new Cube(3);
+            this.cube = new Cube(3.Meters());
         }
 
         [Test]
@@ -31,16 +35,16 @@ namespace StudioLE.Geometry.Tests.Solids
         [Test]
         public void CubeGet_Volume()
         {
-            double expect = this.cube.Width * this.cube.Length * this.cube.Height;
+            Volume expect = this.cube.Width * this.cube.Length * this.cube.Height;
             Assert.AreEqual(expect, this.cube.Volume, "Volume is not correct");
         }
 
         [Test]
         public void CubeGet_Mass()
         {
-            double density = 0.5;
+            Density density = 0.5.KilogramsPerCubicMeter();
             this.cube.Density = density;
-            double expect = this.cube.Width * this.cube.Length * this.cube.Height * density;
+            Mass expect = this.cube.Width * this.cube.Length * this.cube.Height * density;
             Assert.AreEqual(expect, this.cube.Mass, "Mass is not correct");
         }
 
@@ -59,14 +63,14 @@ namespace StudioLE.Geometry.Tests.Solids
         [Test]
         public void CubeFrom_Cuboid()
         {
-            Cuboid cuboid = new Cuboid(3, 3, 3);
+            Cuboid cuboid = new Cuboid(3.Meters(), 3.Meters(), 3.Meters());
             Assert.DoesNotThrow(() => Cube.From(cuboid), "Should create Cube from regular Cuboid");
         }
 
         [Test]
         public void CubeFrom_InvalidCuboid()
         {
-            Cuboid cuboid = new Cuboid(3, 3, 1);
+            Cuboid cuboid = new Cuboid(3.Meters(), 3.Meters(), 1.Meters());
             Assert.Throws<InvalidOperationException>(() => Cube.From(cuboid), "Should not create Cube from irregular Cuboid");
         }
     }
