@@ -114,6 +114,19 @@ namespace StudioLE.Geometry.Tests.Vectors
             Assert.IsTrue(v3.Equals(expect), "Vector is not correct");
         }
 
+        [Test]
+        public void Point_Equality()
+        {
+            var anEqualVector = new Vector(3.Meters(), 2.Meters(), 1.Meters());
+            var aDifferentVector = new Vector(2.Meters(), 2.Meters(), 1.Meters());
+
+            Assert.IsTrue(anEqualVector == this.vector);
+            Assert.IsTrue(anEqualVector.Equals(this.vector));
+            Assert.IsTrue(aDifferentVector != this.vector);
+            Assert.IsFalse(aDifferentVector == this.vector);
+            Assert.IsFalse(aDifferentVector.Equals(this.vector));
+        }
+
         private static Length DistanceTo(Vector p1, Vector p2)
         {
             double x = Math.Pow((p1.X - p2.X).Meters, 2);

@@ -4,7 +4,7 @@ using UnitsNet.NumberExtensions.NumberToVolume;
 
 namespace StudioLE.Geometry.Solids
 {
-    public class Cylinder : Sphere
+    public record Cylinder : Sphere
     {
         public Length Height { get; set; }
 

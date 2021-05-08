@@ -3,7 +3,7 @@ using UnitsNet;
 
 namespace StudioLE.Geometry.Solids
 {
-    public class Cube : Cuboid
+    public record Cube : Cuboid
     {
         public Cube(Length length) : base(length, length, length)
         {

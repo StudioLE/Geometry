@@ -52,6 +52,19 @@ namespace StudioLE.Geometry.Tests.Solids
         }
 
         [Test]
+        public void Cylinder_Equality()
+        {
+            var anEqualCylinder = new Cylinder(1.Meters(), 3.Meters());
+            var aDifferentCylinder = new Cylinder(2.Meters(), 3.Meters());
+
+            Assert.IsTrue(anEqualCylinder == this.cylinder);
+            Assert.IsTrue(anEqualCylinder.Equals(this.cylinder));
+            Assert.IsTrue(aDifferentCylinder != this.cylinder);
+            Assert.IsFalse(aDifferentCylinder == this.cylinder);
+            Assert.IsFalse(aDifferentCylinder.Equals(this.cylinder));
+        }
+
+        [Test]
         public void CylinderIs_Solid()
         {
             Assert.IsNotNull(this.cylinder as Solid, "Should be a Solid");

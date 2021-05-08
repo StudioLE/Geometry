@@ -4,7 +4,7 @@ using UnitsNet.NumberExtensions.NumberToDensity;
 
 namespace StudioLE.Geometry.Solids
 {
-    public class Solid
+    public record Solid
     {
         public Color Color { get; set; } = Color.Black;
 

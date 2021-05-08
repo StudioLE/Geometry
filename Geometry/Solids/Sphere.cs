@@ -4,7 +4,7 @@ using UnitsNet.NumberExtensions.NumberToVolume;
 
 namespace StudioLE.Geometry.Solids
 {
-    public class Sphere : Solid
+    public record Sphere : Solid
     {
         public Length Radius { get; set; }
 

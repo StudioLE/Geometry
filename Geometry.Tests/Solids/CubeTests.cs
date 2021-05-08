@@ -49,6 +49,19 @@ namespace StudioLE.Geometry.Tests.Solids
         }
 
         [Test]
+        public void Cube_Equality()
+        {
+            Cuboid anEqualCube = new Cube(3.Meters());
+            Cuboid aDifferentCube = new Cube(2.Meters());
+
+            Assert.IsTrue(anEqualCube == this.cube);
+            Assert.IsTrue(anEqualCube.Equals(this.cube));
+            Assert.IsTrue(aDifferentCube != this.cube);
+            Assert.IsFalse(aDifferentCube == this.cube);
+            Assert.IsFalse(aDifferentCube.Equals(this.cube));
+        }
+
+        [Test]
         public void CubeIs_Solid()
         {
             Assert.IsNotNull(this.cube as Solid, "Should be a Solid");

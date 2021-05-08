@@ -11,6 +11,7 @@
     <Version>0.0.5</Version>
     <Description>This project is a sandbox for experimenting with C#, Azure Pipelines, NuGet, and other tools. If you're looking for an actual geometry library you should probably look elsewhere.</Description>
     <RootNamespace>StudioLE.Geometry</RootNamespace>
+    <LangVersion>9</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

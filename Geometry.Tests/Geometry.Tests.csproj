@@ -6,6 +6,8 @@
     <IsPackable>false</IsPackable>
 
     <RootNamespace>StudioLE.Geometry.Tests</RootNamespace>
+
+    <LangVersion>9</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
