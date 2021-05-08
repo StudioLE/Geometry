@@ -23,7 +23,7 @@ namespace StudioLE.Geometry.Tests.Solids
         public void CuboidGet_Volume()
         {
             Volume expect = this.cuboid.Width * this.cuboid.Length * this.cuboid.Height;
-            Assert.AreEqual(expect, this.cuboid.Volume, "Volume is not correct");
+            Assert.AreEqual(expect, this.cuboid.GetVolume(), "Volume is not correct");
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace StudioLE.Geometry.Tests.Solids
             Density density = 0.5.KilogramsPerCubicMeter();
             this.cuboid.Density = density;
             Mass expect = this.cuboid.Width * this.cuboid.Length * this.cuboid.Height * density;
-            Assert.AreEqual(expect, this.cuboid.Mass, "Mass is not correct");
+            Assert.AreEqual(expect, this.cuboid.GetMass(), "GetMass is not correct");
         }
 
         [Test]

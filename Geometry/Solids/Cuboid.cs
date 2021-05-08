@@ -10,7 +10,7 @@ namespace StudioLE.Geometry.Solids
 
         public Length Length { get; set; }
 
-        public override Volume Volume => this.Width * this.Height * this.Length;
+        public override Volume GetVolume() => this.Width * this.Height * this.Length;
 
         public Cuboid(Length width, Length length, Length height)
         {

@@ -8,7 +8,7 @@ namespace StudioLE.Geometry.Solids
     {
         public Length Height { get; set; }
 
-        public override Volume Volume => CalculateVolume(this.Radius, this.Height);
+        public override Volume GetVolume() => CalculateVolume(this.Radius, this.Height);
 
         public Cylinder(Length radius, Length height) : base(radius)
         {

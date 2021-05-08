@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using StudioLE.Geometry.Solids;
 using UnitsNet;
 using UnitsNet.NumberExtensions.NumberToDensity;
@@ -16,17 +17,13 @@ namespace StudioLE.Geometry.Tests.Solids
         [SetUp]
         public void Setup()
         {
-            this.solid = new Solid
-            {
-                Volume = 4.CubicMeters()
-            };
+            this.solid = new Solid();
         }
 
         [Test]
         public void SolidGet_Volume()
         {
-            Volume expect = 4.CubicMeters();
-            Assert.AreEqual(expect, this.solid.Volume, "Volume is not correct");
+            Assert.Throws<NotImplementedException>(() => this.solid.GetVolume(), "Volume should throw");
         }
 
         [Test]
@@ -34,8 +31,7 @@ namespace StudioLE.Geometry.Tests.Solids
         {
             Density density = 0.5.KilogramsPerCubicMeter();
             this.solid.Density = density;
-            Mass expect = this.solid.Volume * density;
-            Assert.AreEqual(expect, this.solid.Mass, "Mass is not correct");
+            Assert.Throws<NotImplementedException> (() => this.solid.GetMass(), "GetMass should throw");
         }
 
         [Test]

@@ -48,7 +48,7 @@ namespace StudioLE.Geometry.Tests.Solids
         public void SphereGet_Volume()
         {
             Volume expect = CalculateVolume(this.sphere.Radius);
-            Assert.AreEqual(expect, this.sphere.Volume, "Volume is not correct");
+            Assert.AreEqual(expect, this.sphere.GetVolume(), "Volume is not correct");
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace StudioLE.Geometry.Tests.Solids
             Density density = 0.5.KilogramsPerCubicMeter();
             this.sphere.Density = density;
             Mass expect = CalculateVolume(this.sphere.Radius) * density;
-            Assert.AreEqual(expect, this.sphere.Mass, "Mass is not correct");
+            Assert.AreEqual(expect, this.sphere.GetMass(), "GetMass is not correct");
         }
 
         [Test]

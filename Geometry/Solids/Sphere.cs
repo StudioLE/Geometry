@@ -14,12 +14,12 @@ namespace StudioLE.Geometry.Solids
             set => this.Radius = value / 2;
         }
 
-        public override Volume Volume => CalculateVolume(this.Radius);
-
         public Sphere(Length radius)
         {
             this.Radius = radius;
         }
+
+        public override Volume GetVolume() => CalculateVolume(this.Radius);
 
         private static Volume CalculateVolume(Length radius)
         {

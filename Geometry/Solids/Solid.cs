@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using UnitsNet;
 using UnitsNet.NumberExtensions.NumberToDensity;
 
@@ -10,8 +11,8 @@ namespace StudioLE.Geometry.Solids
 
         public Density Density { get; set; } = 1.GramsPerCubicCentimeter();
 
-        public virtual Volume Volume { get; set; }
+        public virtual Volume GetVolume() => throw new NotImplementedException();
 
-        public Mass Mass => this.Volume * this.Density;
+        public Mass GetMass() => this.GetVolume() * this.Density;
     }
 }
