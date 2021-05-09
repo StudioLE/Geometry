@@ -19,7 +19,7 @@ namespace StudioLE.Geometry.Solids
             this.Radius = radius;
         }
 
-        public override Volume GetVolume() => CalculateVolume(this.Radius);
+        public override Volume Volume() => CalculateVolume(this.Radius);
 
         private static Volume CalculateVolume(Length radius)
         {

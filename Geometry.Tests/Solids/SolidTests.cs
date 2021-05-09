@@ -23,7 +23,7 @@ namespace StudioLE.Geometry.Tests.Solids
         [Test]
         public void SolidGet_Volume()
         {
-            Assert.Throws<NotImplementedException>(() => this.solid.GetVolume(), "Volume should throw");
+            Assert.Throws<NotImplementedException>(() => this.solid.Volume(), "Volume should throw");
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace StudioLE.Geometry.Tests.Solids
         {
             Density density = 0.5.KilogramsPerCubicMeter();
             this.solid.Density = density;
-            Assert.Throws<NotImplementedException> (() => this.solid.GetMass(), "GetMass should throw");
+            Assert.Throws<NotImplementedException> (() => this.solid.Mass(), "Mass should throw");
         }
 
         [Test]

@@ -11,8 +11,8 @@ namespace StudioLE.Geometry.Solids
 
         public Density Density { get; set; } = 1.GramsPerCubicCentimeter();
 
-        public virtual Volume GetVolume() => throw new NotImplementedException();
+        public virtual Volume Volume() => throw new NotImplementedException();
 
-        public Mass GetMass() => this.GetVolume() * this.Density;
+        public Mass Mass() => this.Volume() * this.Density;
     }
 }

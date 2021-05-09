@@ -39,7 +39,7 @@ namespace StudioLE.Geometry.Tests.Solids
         public void CylinderGet_Volume()
         {
             Volume expect = CalculateVolume(this.cylinder.Radius, this.cylinder.Height);
-            Assert.AreEqual(expect, this.cylinder.GetVolume(), "Volume is not correct");
+            Assert.AreEqual(expect, this.cylinder.Volume(), "Volume is not correct");
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace StudioLE.Geometry.Tests.Solids
             Density density = 0.5.KilogramsPerCubicMeter();
             this.cylinder.Density = density;
             Mass expect = CalculateVolume(this.cylinder.Radius, this.cylinder.Height) * density;
-            Assert.AreEqual(expect, this.cylinder.GetMass(), "GetMass is not correct");
+            Assert.AreEqual(expect, this.cylinder.Mass(), "Mass is not correct");
         }
 
         [Test]
