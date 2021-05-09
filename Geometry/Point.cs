@@ -4,13 +4,13 @@ using UnitsNet.NumberExtensions.NumberToLength;
 
 namespace StudioLE.Geometry
 {
-    public class Point
+    public record Point
     {
-        public Length X { get; set; }
+        public Length X { get; init; }
 
-        public Length Y { get; set; }
+        public Length Y { get; init; }
 
-        public Length Z { get; set; }
+        public Length Z { get; init; }
 
         public static Point Origin => new Point(0.Meters(), 0.Meters(), 0.Meters());
 
@@ -55,11 +55,6 @@ namespace StudioLE.Geometry
                 (p1.Y.Meters / p2.Y.Meters).Meters(),
                 (p1.Z.Meters / p2.Z.Meters).Meters()
             );
-        }
-
-        public bool Equals(Point p2)
-        {
-            return this.X == p2.X && this.Y == p2.Y && this.Z == p2.Z;
         }
 
         public Length DistanceTo(Point p2)

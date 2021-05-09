@@ -90,6 +90,22 @@ namespace StudioLE.Geometry.Tests.Vectors
             Assert.IsTrue(p3.Equals(expect), "Point is not correct");
         }
 
+        [Test]
+        public void Point_Equality()
+        {
+            var same = new Point(3.Meters(), 2.Meters(), 1.Meters());
+            var different = new Point(2.Meters(), 2.Meters(), 1.Meters());
+
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(same == this.point, "Objects should be equal");
+                Assert.IsTrue(same.Equals(this.point), "Objects should be equal");
+                Assert.IsTrue(different != this.point, "Objects should be different");
+                Assert.IsFalse(different == this.point, "Objects should be different");
+                Assert.IsFalse(different.Equals(this.point), "Objects should be different");
+            });
+        }
+
         private static Length DistanceTo(Point p1, Point p2)
         {
             double x = Math.Pow((p1.X - p2.X).Meters, 2);

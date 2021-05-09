@@ -3,7 +3,7 @@ using UnitsNet.NumberExtensions.NumberToLength;
 
 namespace StudioLE.Geometry
 {
-    public class Vector : Point
+    public record Vector : Point
     {
         public new static Vector Origin => new Vector(0.Meters(), 0.Meters(), 0.Meters());
 

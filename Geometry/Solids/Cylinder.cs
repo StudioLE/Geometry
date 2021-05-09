@@ -4,11 +4,11 @@ using UnitsNet.NumberExtensions.NumberToVolume;
 
 namespace StudioLE.Geometry.Solids
 {
-    public class Cylinder : Sphere
+    public record Cylinder : Sphere
     {
-        public Length Height { get; set; }
+        public Length Height { get; init; }
 
-        public override Volume Volume => CalculateVolume(this.Radius, this.Height);
+        public override Volume Volume() => CalculateVolume(this.Radius, this.Height);
 
         public Cylinder(Length radius, Length height) : base(radius)
         {

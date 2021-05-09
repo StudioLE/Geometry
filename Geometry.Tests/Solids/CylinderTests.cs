@@ -39,16 +39,31 @@ namespace StudioLE.Geometry.Tests.Solids
         public void CylinderGet_Volume()
         {
             Volume expect = CalculateVolume(this.cylinder.Radius, this.cylinder.Height);
-            Assert.AreEqual(expect, this.cylinder.Volume, "Volume is not correct");
+            Assert.AreEqual(expect, this.cylinder.Volume(), "Volume is not correct");
         }
 
         [Test]
         public void CylinderGet_Mass()
         {
-            Density density = 0.5.KilogramsPerCubicMeter();
-            this.cylinder.Density = density;
+            Density density = 1.GramsPerCubicCentimeter();
             Mass expect = CalculateVolume(this.cylinder.Radius, this.cylinder.Height) * density;
-            Assert.AreEqual(expect, this.cylinder.Mass, "Mass is not correct");
+            Assert.AreEqual(expect, this.cylinder.Mass(), "Mass is not correct");
+        }
+
+        [Test]
+        public void Cylinder_Equality()
+        {
+            var same = new Cylinder(1.Meters(), 3.Meters());
+            var different = new Cylinder(2.Meters(), 3.Meters());
+
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(same == this.cylinder, "Objects should be equal");
+                Assert.IsTrue(same.Equals(this.cylinder), "Objects should be equal");
+                Assert.IsTrue(different != this.cylinder, "Objects should be different");
+                Assert.IsFalse(different == this.cylinder, "Objects should be different");
+                Assert.IsFalse(different.Equals(this.cylinder), "Objects should be different");
+            });
         }
 
         [Test]

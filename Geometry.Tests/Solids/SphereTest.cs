@@ -29,35 +29,56 @@ namespace StudioLE.Geometry.Tests.Solids
         }
 
         [TestCase(1)]
-        public void SphereSet_Diameter(double diameter)
+        public void SphereInit_Diameter(double diameter)
         {
-            this.sphere.Diameter = diameter.Meters();
+            Sphere newSphere = this.sphere with
+            {
+                Diameter = diameter.Meters()
+            };
             Length expect = diameter.Meters() / 2;
-            Assert.AreEqual(expect, this.sphere.Radius, "Setting Diameter should set Radius");
+            Assert.AreEqual(expect, newSphere.Radius, "Setting Diameter should set Radius");
         }
 
         [TestCase(1)]
-        public void SphereSet_Radius(double radius)
+        public void SphereInit_Radius(double radius)
         {
-            this.sphere.Radius = radius.Meters();
+            Sphere newSphere = this.sphere with
+            {
+                Radius = radius.Meters()
+            };
             Length expect = radius.Meters() * 2;
-            Assert.AreEqual(expect, this.sphere.Diameter, "Setting Radius should set Diameter");
+            Assert.AreEqual(expect, newSphere.Diameter, "Setting Radius should set Diameter");
         }
 
         [Test]
         public void SphereGet_Volume()
         {
             Volume expect = CalculateVolume(this.sphere.Radius);
-            Assert.AreEqual(expect, this.sphere.Volume, "Volume is not correct");
+            Assert.AreEqual(expect, this.sphere.Volume(), "Volume is not correct");
         }
 
         [Test]
         public void SphereGet_Mass()
         {
-            Density density = 0.5.KilogramsPerCubicMeter();
-            this.sphere.Density = density;
+            Density density = 1.GramsPerCubicCentimeter();
             Mass expect = CalculateVolume(this.sphere.Radius) * density;
-            Assert.AreEqual(expect, this.sphere.Mass, "Mass is not correct");
+            Assert.AreEqual(expect, this.sphere.Mass(), "Mass is not correct");
+        }
+
+        [Test]
+        public void Sphere_Equality()
+        {
+            var same = new Sphere(3.Meters());
+            var different = new Sphere(2.Meters());
+
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(same == this.sphere, "Objects should be equal");
+                Assert.IsTrue(same.Equals(this.sphere), "Objects should be equal");
+                Assert.IsTrue(different != this.sphere, "Objects should be different");
+                Assert.IsFalse(different == this.sphere, "Objects should be different");
+                Assert.IsFalse(different.Equals(this.sphere), "Objects should be different");
+            });
         }
 
         [Test]

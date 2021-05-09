@@ -1,17 +1,18 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using UnitsNet;
 using UnitsNet.NumberExtensions.NumberToDensity;
 
 namespace StudioLE.Geometry.Solids
 {
-    public class Solid
+    public record Solid
     {
-        public Color Color { get; set; } = Color.Black;
+        public Color Color { get; init; } = Color.Black;
 
-        public Density Density { get; set; } = 1.GramsPerCubicCentimeter();
+        public Density Density { get; init; } = 1.GramsPerCubicCentimeter();
 
-        public virtual Volume Volume { get; set; }
+        public virtual Volume Volume() => throw new NotImplementedException();
 
-        public Mass Mass => this.Volume * this.Density;
+        public Mass Mass() => this.Volume() * this.Density;
     }
 }

@@ -4,22 +4,22 @@ using UnitsNet.NumberExtensions.NumberToVolume;
 
 namespace StudioLE.Geometry.Solids
 {
-    public class Sphere : Solid
+    public record Sphere : Solid
     {
-        public Length Radius { get; set; }
+        public Length Radius { get; init; }
 
         public Length Diameter
         { 
             get => this.Radius * 2;
-            set => this.Radius = value / 2;
+            init => this.Radius = value / 2;
         }
-
-        public override Volume Volume => CalculateVolume(this.Radius);
 
         public Sphere(Length radius)
         {
             this.Radius = radius;
         }
+
+        public override Volume Volume() => CalculateVolume(this.Radius);
 
         private static Volume CalculateVolume(Length radius)
         {
