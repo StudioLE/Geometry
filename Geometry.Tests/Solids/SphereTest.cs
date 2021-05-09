@@ -63,14 +63,17 @@ namespace StudioLE.Geometry.Tests.Solids
         [Test]
         public void Sphere_Equality()
         {
-            var anEqualSphere = new Sphere(3.Meters());
-            var aDifferentSphere = new Sphere(2.Meters());
+            var same = new Sphere(3.Meters());
+            var different = new Sphere(2.Meters());
 
-            Assert.IsTrue(anEqualSphere == this.sphere);
-            Assert.IsTrue(anEqualSphere.Equals(this.sphere));
-            Assert.IsTrue(aDifferentSphere != this.sphere);
-            Assert.IsFalse(aDifferentSphere == this.sphere);
-            Assert.IsFalse(aDifferentSphere.Equals(this.sphere));
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(same == this.sphere, "Objects should be equal");
+                Assert.IsTrue(same.Equals(this.sphere), "Objects should be equal");
+                Assert.IsTrue(different != this.sphere, "Objects should be different");
+                Assert.IsFalse(different == this.sphere, "Objects should be different");
+                Assert.IsFalse(different.Equals(this.sphere), "Objects should be different");
+            });
         }
 
         [Test]

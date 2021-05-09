@@ -38,14 +38,17 @@ namespace StudioLE.Geometry.Tests.Solids
         [Test]
         public void Cuboid_Equality()
         {
-            var anEqualCuboid = new Cuboid(3.Meters(), 2.Meters(), 1.Meters());
-            var aDifferentCuboid = new Cuboid(3.Meters(), 1.Meters(), 1.Meters());
+            var same = new Cuboid(3.Meters(), 2.Meters(), 1.Meters());
+            var different = new Cuboid(3.Meters(), 1.Meters(), 1.Meters());
 
-            Assert.IsTrue(anEqualCuboid == this.cuboid);
-            Assert.IsTrue(anEqualCuboid.Equals(this.cuboid));
-            Assert.IsTrue(aDifferentCuboid != this.cuboid);
-            Assert.IsFalse(aDifferentCuboid == this.cuboid);
-            Assert.IsFalse(aDifferentCuboid.Equals(this.cuboid));
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(same == this.cuboid, "Objects should be equal");
+                Assert.IsTrue(same.Equals(this.cuboid), "Objects should be equal");
+                Assert.IsTrue(different != this.cuboid, "Objects should be different");
+                Assert.IsFalse(different == this.cuboid, "Objects should be different");
+                Assert.IsFalse(different.Equals(this.cuboid), "Objects should be different");
+            });
         }
 
         [Test]

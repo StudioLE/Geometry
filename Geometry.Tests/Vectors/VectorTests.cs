@@ -115,16 +115,19 @@ namespace StudioLE.Geometry.Tests.Vectors
         }
 
         [Test]
-        public void Point_Equality()
+        public void Vector_Equality()
         {
-            var anEqualVector = new Vector(3.Meters(), 2.Meters(), 1.Meters());
-            var aDifferentVector = new Vector(2.Meters(), 2.Meters(), 1.Meters());
+            var same = new Vector(3.Meters(), 2.Meters(), 1.Meters());
+            var different = new Vector(2.Meters(), 2.Meters(), 1.Meters());
 
-            Assert.IsTrue(anEqualVector == this.vector);
-            Assert.IsTrue(anEqualVector.Equals(this.vector));
-            Assert.IsTrue(aDifferentVector != this.vector);
-            Assert.IsFalse(aDifferentVector == this.vector);
-            Assert.IsFalse(aDifferentVector.Equals(this.vector));
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(same == this.vector, "Objects should be equal");
+                Assert.IsTrue(same.Equals(this.vector), "Objects should be equal");
+                Assert.IsTrue(different != this.vector, "Objects should be different");
+                Assert.IsFalse(different == this.vector, "Objects should be different");
+                Assert.IsFalse(different.Equals(this.vector), "Objects should be different");
+            });
         }
 
         private static Length DistanceTo(Vector p1, Vector p2)
