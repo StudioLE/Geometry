@@ -6,7 +6,7 @@ namespace StudioLE.Geometry.Solids
 {
     public record Cylinder : Sphere
     {
-        public Length Height { get; set; }
+        public Length Height { get; init; }
 
         public override Volume Volume() => CalculateVolume(this.Radius, this.Height);
 

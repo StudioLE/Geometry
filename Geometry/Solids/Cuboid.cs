@@ -4,11 +4,11 @@ namespace StudioLE.Geometry.Solids
 {
     public record Cuboid : Solid
     {
-        public Length Width { get; set; }
+        public Length Width { get; init; }
 
-        public Length Height { get; set; }
+        public Length Height { get; init; }
 
-        public Length Length { get; set; }
+        public Length Length { get; init; }
 
         public override Volume Volume() => this.Width * this.Height * this.Length;
 

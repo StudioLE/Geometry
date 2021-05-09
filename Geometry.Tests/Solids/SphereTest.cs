@@ -29,19 +29,25 @@ namespace StudioLE.Geometry.Tests.Solids
         }
 
         [TestCase(1)]
-        public void SphereSet_Diameter(double diameter)
+        public void SphereInit_Diameter(double diameter)
         {
-            this.sphere.Diameter = diameter.Meters();
+            Sphere newSphere = this.sphere with
+            {
+                Diameter = diameter.Meters()
+            };
             Length expect = diameter.Meters() / 2;
-            Assert.AreEqual(expect, this.sphere.Radius, "Setting Diameter should set Radius");
+            Assert.AreEqual(expect, newSphere.Radius, "Setting Diameter should set Radius");
         }
 
         [TestCase(1)]
-        public void SphereSet_Radius(double radius)
+        public void SphereInit_Radius(double radius)
         {
-            this.sphere.Radius = radius.Meters();
+            Sphere newSphere = this.sphere with
+            {
+                Radius = radius.Meters()
+            };
             Length expect = radius.Meters() * 2;
-            Assert.AreEqual(expect, this.sphere.Diameter, "Setting Radius should set Diameter");
+            Assert.AreEqual(expect, newSphere.Diameter, "Setting Radius should set Diameter");
         }
 
         [Test]
@@ -54,8 +60,7 @@ namespace StudioLE.Geometry.Tests.Solids
         [Test]
         public void SphereGet_Mass()
         {
-            Density density = 0.5.KilogramsPerCubicMeter();
-            this.sphere.Density = density;
+            Density density = 1.GramsPerCubicCentimeter();
             Mass expect = CalculateVolume(this.sphere.Radius) * density;
             Assert.AreEqual(expect, this.sphere.Mass(), "Mass is not correct");
         }

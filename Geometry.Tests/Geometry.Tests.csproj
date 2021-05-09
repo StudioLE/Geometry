@@ -1,13 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-
-    <IsPackable>false</IsPackable>
-
-    <RootNamespace>StudioLE.Geometry.Tests</RootNamespace>
-
+    <TargetFramework>net5.0</TargetFramework>
     <LangVersion>9</LangVersion>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>StudioLE.Geometry.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

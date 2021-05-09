@@ -29,8 +29,7 @@ namespace StudioLE.Geometry.Tests.Solids
         [Test]
         public void CuboidGet_Mass()
         {
-            Density density = 0.5.KilogramsPerCubicMeter();
-            this.cuboid.Density = density;
+            Density density = 1.GramsPerCubicCentimeter();
             Mass expect = this.cuboid.Width * this.cuboid.Length * this.cuboid.Height * density;
             Assert.AreEqual(expect, this.cuboid.Mass(), "Mass is not correct");
         }

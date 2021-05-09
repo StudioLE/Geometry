@@ -6,12 +6,12 @@ namespace StudioLE.Geometry.Solids
 {
     public record Sphere : Solid
     {
-        public Length Radius { get; set; }
+        public Length Radius { get; init; }
 
         public Length Diameter
         { 
             get => this.Radius * 2;
-            set => this.Radius = value / 2;
+            init => this.Radius = value / 2;
         }
 
         public Sphere(Length radius)

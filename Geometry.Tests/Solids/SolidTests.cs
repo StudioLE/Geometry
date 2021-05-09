@@ -1,9 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
 using StudioLE.Geometry.Solids;
-using UnitsNet;
-using UnitsNet.NumberExtensions.NumberToDensity;
-using UnitsNet.NumberExtensions.NumberToVolume;
 
 // ReSharper disable RedundantCast
 
@@ -29,8 +26,6 @@ namespace StudioLE.Geometry.Tests.Solids
         [Test]
         public void SolidGet_Mass()
         {
-            Density density = 0.5.KilogramsPerCubicMeter();
-            this.solid.Density = density;
             Assert.Throws<NotImplementedException> (() => this.solid.Mass(), "Mass should throw");
         }
 

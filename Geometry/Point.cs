@@ -6,11 +6,11 @@ namespace StudioLE.Geometry
 {
     public record Point
     {
-        public Length X { get; set; }
+        public Length X { get; init; }
 
-        public Length Y { get; set; }
+        public Length Y { get; init; }
 
-        public Length Z { get; set; }
+        public Length Z { get; init; }
 
         public static Point Origin => new Point(0.Meters(), 0.Meters(), 0.Meters());
 

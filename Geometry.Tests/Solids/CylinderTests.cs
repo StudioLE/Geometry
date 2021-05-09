@@ -45,8 +45,7 @@ namespace StudioLE.Geometry.Tests.Solids
         [Test]
         public void CylinderGet_Mass()
         {
-            Density density = 0.5.KilogramsPerCubicMeter();
-            this.cylinder.Density = density;
+            Density density = 1.GramsPerCubicCentimeter();
             Mass expect = CalculateVolume(this.cylinder.Radius, this.cylinder.Height) * density;
             Assert.AreEqual(expect, this.cylinder.Mass(), "Mass is not correct");
         }

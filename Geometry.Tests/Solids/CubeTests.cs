@@ -42,8 +42,7 @@ namespace StudioLE.Geometry.Tests.Solids
         [Test]
         public void CubeGet_Mass()
         {
-            Density density = 0.5.KilogramsPerCubicMeter();
-            this.cube.Density = density;
+            Density density = 1.GramsPerCubicCentimeter();
             Mass expect = this.cube.Width * this.cube.Length * this.cube.Height * density;
             Assert.AreEqual(expect, this.cube.Mass(), "Mass is not correct");
         }

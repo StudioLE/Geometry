@@ -7,9 +7,9 @@ namespace StudioLE.Geometry.Solids
 {
     public record Solid
     {
-        public Color Color { get; set; } = Color.Black;
+        public Color Color { get; init; } = Color.Black;
 
-        public Density Density { get; set; } = 1.GramsPerCubicCentimeter();
+        public Density Density { get; init; } = 1.GramsPerCubicCentimeter();
 
         public virtual Volume Volume() => throw new NotImplementedException();
 
