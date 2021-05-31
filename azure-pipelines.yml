@@ -9,9 +9,9 @@
 # Build name
 name: '$(Year:yyyy).$(Month).$(DayOfMonth).$(Rev:r)'
 
-# the build will trigger on any changes to the master branch
+# the build will trigger on any changes to the main branch
 trigger:
-- master
+- main
 
 # the build will run on a Microsoft hosted agent, using the lastest Windows VM Image
 pool:
